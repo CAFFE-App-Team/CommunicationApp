@@ -5,7 +5,7 @@ local barScene = require "barScene"
  
 local scene = composer.newScene()
 
---[[I am making aome changes--]]
+--[[I am making some changes--]]
 
 -- made a change for git
  
