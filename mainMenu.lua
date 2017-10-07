@@ -4,6 +4,8 @@ local loadsave = require( "loadsave" )
 local barScene = require "barScene"
  
 local scene = composer.newScene()
+
+-- made a change for git
  
 -- -----------------------------------------------------------------------------------
 -- Code outside of the scene event functions below will only be executed ONCE unless
