@@ -1,0 +1,20 @@
+settings = 
+{
+	 orientation =
+    {
+        default = "landscapeRight",
+        supported = { "landscapeRight", "landscapeLeft" }
+    },
+
+     android =
+    {
+        usesPermissions =
+        {
+            "android.permission.CAMERA",
+            "android.permission.WRITE_EXTERNAL_STORAGE",       
+            "android.permission.RECORD_AUDIO",
+        },
+        
+    },
+	
+}
