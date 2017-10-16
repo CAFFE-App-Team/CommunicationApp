@@ -27,7 +27,7 @@ local iconMax=10
 
  local gridDisplayed=1
 
- local numberOfGrids = 4
+ local numberOfGrids = 3
  
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
@@ -316,6 +316,16 @@ elseif (name=="englishNumberScreen") then
 
 composer.gotoScene( "number", options )
 
+elseif (name=="bengaliNumberScreen") then
+
+    --gameData.workingScreen = gameData.emergencyScreen
+    --gameData.saveFile="emergencyScreen"
+    gameData.screenIndex=4
+
+    gameData.enterEditMode=true 
+
+composer.gotoScene( "number", options )
+
 
 -- elseif (name=="foodScreen") then
 
@@ -450,12 +460,19 @@ buttons[1]:addEventListener( "touch", loadScreen )
 
 -- nextScreen = 465*3
 
- buttons[12] = display.newImageRect( "category/colours.png",size,size)
+ buttons[12] = display.newImageRect( "category/common.png",size,size)
  buttons[12].x = startX+nextScreen+(3*gap)
  buttons[12].y = startY
  buttons[12].name = "commonScreen"
  screenGrid[3]:insert(buttons[12])
  buttons[12]:addEventListener( "touch", loadScreen )
+
+--[[  buttons[13] = display.newImageRect( "category/stories.png",size,size)
+ buttons[13].x = startX+nextScreen+(3*gap*2)
+ buttons[13].y = startY
+ buttons[13].name = "storiesScreen"
+ screenGrid[4]:insert(buttons[13])
+ buttons[13]:addEventListener( "touch", loadScreen )--]]
 
 print ("grids is "..numberOfGrids)
 
