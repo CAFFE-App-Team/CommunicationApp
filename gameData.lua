@@ -322,16 +322,16 @@ gameData.englishLetterScreen = {
 
 gameData.englishNumberScreen = {
   
- { text="এক", audio="1", image="one", ind=1 },
- { text="দুই", audio="2", image="two", ind=2 },
- { text="তিন", audio="3", image="three", ind=3 },
- { text="চার", audio="4", image="four", ind=4 },
- { text="পাঁচ", audio="5", image="five", ind=5 },
- { text="ছয়", audio="6", image="six", ind=6 },
- { text="সাত", audio="7", image="seven", ind=7 },
- { text="আট", audio="8", image="eight", ind=8 },
- { text="নয়", audio="9", image="nine", ind=9 },
- { text="শূন্য", audio="0", image="zero", ind=10 }
+ { text="One", audio="1", image="1", ind=1 },
+ { text="Two", audio="2", image="2", ind=2 },
+ { text="Three", audio="3", image="3", ind=3 },
+ { text="Four", audio="4", image="4", ind=4 },
+ { text="Five", audio="5", image="5", ind=5 },
+ { text="Six", audio="6", image="6", ind=6 },
+ { text="Seven", audio="7", image="7", ind=7 },
+ { text="Eight", audio="8", image="8", ind=8 },
+ { text="Nine", audio="9", image="9", ind=9 },
+ { text="Zero", audio="0", image="0", ind=10 }
 
 }
 
@@ -445,7 +445,7 @@ gameData.defaultImages = {
                           "a","aa","i","ee","u","oo","ri","ae","aae","o","au","k","kh","g","gh","ng","ch","chh","j","jh","n","t","tth","d","ddh","nn","thho","th","the","thhe","nnn","pa",
                           "pha","ba","bha","maa","ya","ra","la","sa","sshh","haa","rhha","drha","yaa","ktt","onn","bss","chn","Aaaa","Bb","Cc","Dd","Eeee","Ff","Gg","Hh","Ii","Jj","Kk","Ll","Mm",
                           "Nnnnn","Ooo","Pp","Qq","Rr","Ss","Tt","Uu","Vv","Ww","Xx","Yy","Zz","basin","bati","bench","chair","clock","computer1","door1","fan","glass"
-                          ,"plate","ruler","specialChair","spoon","stool","switch","table","toylet"
+                          ,"plate","ruler","specialChair","spoon","stool","switch","table","toylet","1","2","3","4","5","6","7","8","9","0"
                       }
 
 gameData.defaultSounds = {"ma","baba","bhai","bhon","bichana","khudarto","toilet",
@@ -469,7 +469,7 @@ gameData.defaultSounds = {"ma","baba","bhai","bhon","bichana","khudarto","toilet
                           "Aaaa","Bb","Cc","Dd","Eeee","Ff","Gg","Hh","Ii","Jj","Kk","Ll","Mm",
                           "Nnnnn","Ooo","Pp","Qq","Rr","Ss","Tt","Uu","Vv","Ww","Xx","Yy","Zz","bati",
                           "bench","besin","bisesChair","chamoch","ghori","glass","switch","thala","tul","khelna","khelnaGari",
-                          "khelnaKengaru","khelnaPutul","khelnaShinho"
+                          "khelnaKengaru","khelnaPutul","khelnaShinho","1","2","3","4","5","6","7","8","9","0"
                         }
 
 gameData.defaultSoundsBangla = {"মা","বাবা","ভাই","বোন","বিছানা","ক্ষুদার্থ","টয়লেট",
@@ -488,7 +488,7 @@ gameData.defaultSoundsBangla = {"মা","বাবা","ভাই","বো�
                           "সাদা","শান্ত"," শার্পনার","শার্ট","সে","শিক্ষিকা","সমস্যা","সবুজ","সকাল","সোনালী",
                           "সান্ধ্যভোজন","সন্ধ্যা"," ট্যাবলেট","তাদের","তার","তারা","ট্রাউজার্স","তোমার","উচ্চস্বর","ভাল",
                           "ভাঙা","ভূগোল","বেসিন ","বাটি","বেঞ্চ","ঘড়ি","গ্লাস","থালা","বিশেষ চেয়ার","চামচ","টুল","সুইচ",
-                          "খেলনা গাড়ি","খেলনা","খেলনা পুতুল","খেলনা ক্যাঙ্গারু","খেলনা সিংহ"
+                          "খেলনা গাড়ি","খেলনা","খেলনা পুতুল","খেলনা ক্যাঙ্গারু","খেলনা সিংহ","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Zero"
                         }
 
 
