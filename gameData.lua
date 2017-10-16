@@ -152,12 +152,12 @@ gameData.banglaNumberScreen = {
 }
 
 gameData.actionScreen = {
-{ text="যাওয়া", audio="jawa", image="go", ind=1 },
+{ text="যেতে", audio="jete", image="go", ind=1 },
 { text="হাঁটা", audio="hata", image="walk", ind=2 },
 { text="", audio="", image="non", ind=3 },
 --{ text="", audio="", image="run", ind=3 },
 { text="খেলা", audio="khela", image="game", ind=4 },
-{ text="বসা", audio="boso", image="sit", ind=5 },
+{ text="বসো", audio="boso", image="sit", ind=5 },
 { text="দাড়াও", audio="Daraw", image="stand", ind=6 },
 { text="সমস্যা", audio="smasswa", image="problem", ind=7 },
 
@@ -455,7 +455,7 @@ gameData.defaultSounds = {"ma","baba","bhai","bhon","bichana","khudarto","toilet
                           "bondhokora","boso","chacha","Chachi","chai","chair","chatri","chatro","chele",
                           "chokh","chul","computer","dada","dadi","darate","Daraw","dath","dhormoshikka",
                           "dhoya","dorja","dukkhito","dupurerkhabar","dushor","engreji","etihash","fan","gan",
-                          "ghar","ghum","ghumate","golapi","gonith","ha","haath","hata","hathe","holud","jawa",
+                          "ghar","ghum","ghumate","golapi","gonith","ha","haath","hata","hathe","holud","jethe",
                           "jete","jolkhabar","joralo","juta","kagoj","kalo","kan","ke","kharap","khawa","khela",
                           "khete","kokhon","kolom","kom","komola","kuthay","lal","light","maponi","meye","mohila",
                           "moyla","muchni","mukh","na","nak","nana","nani","nasta","nil","nirob","ondhokar","opekkhakora",
