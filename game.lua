@@ -228,30 +228,7 @@ end
 
 --print ("from screen list "..gameData.screenList[1][1].image)
 
-print ("sae file is "..gameData.saveFile)
 
-
-
-
-  --[[      if (loadsave.loadTable( "homeScreen.json" ) ~= nil) then
-      gameData.homeScreen = loadsave.loadTable( "homeScreen.json"  )
-    end
-
-
-        if (loadsave.loadTable( "schoolScreen.json" ) ~= nil) then
-      gameData.schoolScreen = loadsave.loadTable( "schoolScreen.json"  )
-    end
-
-
-        if (loadsave.loadTable( "emergencyScreen.json" ) ~= nil) then
-      gameData.emergencyScreen = loadsave.loadTable( "emergencyScreen.json"  )
-    end
-
-        if (loadsave.loadTable( gameData.saveFile..".json" ) ~= nil) then
-      gameData.workingScreen = loadsave.loadTable( gameData.saveFile..".json"  )
-
-print ("i loaded")
-    end]]--
 
         if (loadsave.loadTable( "screenList.json" ) ~= nil) then
       gameData.screenList = loadsave.loadTable( "screenList.json"  )
@@ -424,13 +401,13 @@ local arrowWidth=30
 local arrowHeight=arrowWidth*3.566
 
 rightArrow = display.newImageRect( "rightArrow.png",arrowWidth,arrowHeight)
-imageGroup:insert(rightArrow)
+--imageGroup:insert(rightArrow)
 rightArrow.x=390
 rightArrow.y=200
 rightArrow:addEventListener( "touch", rightArrowPress )
 
 leftArrow = display.newImageRect( "leftArrow.png",arrowWidth,arrowHeight)
-imageGroup:insert(leftArrow)
+--imageGroup:insert(leftArrow)
 leftArrow.x=20
 leftArrow.y=200
 leftArrow.alpha=0.7
@@ -1285,7 +1262,7 @@ local homeHeight = homeWidth * 1.32
 local previousBtn = display.newImageRect("homeBtn.png", homeWidth,homeHeight)
 previousBtn.x=display.contentWidth-35
 previousBtn.y=240
-imageGroup:insert(previousBtn)
+--imageGroup:insert(previousBtn)
 
 previousBtn:addEventListener("touch", previousScreen)
 
@@ -1304,6 +1281,20 @@ if (gameData.screenGridPositions [gameData.screenIndex]>1) then
   end
 end  
 
+sceneGroup:insert(imageGroup)
+sceneGroup:insert(editBtn)
+
+local leftRectangle = display.newRect( 0, 100, 70, 400 )
+leftRectangle:setFillColor( 69/255, 39/255, 160/255 )
+sceneGroup:insert(leftRectangle)
+
+local rightRectangle = display.newRect( 428, 100, 105, 400 )
+rightRectangle:setFillColor( 69/255, 39/255, 160/255 )
+sceneGroup:insert(rightRectangle)
+
+sceneGroup:insert(leftArrow)
+sceneGroup:insert(rightArrow)
+sceneGroup:insert(previousBtn)
 
 local gridsNeeded = math.ceil(#gameData.workingScreen/iconMax)
 
@@ -1338,8 +1329,7 @@ gridDisplayed = gameData.screenGridPositions[gameData.screenIndex]
 
 end
 
-sceneGroup:insert(imageGroup)
-sceneGroup:insert(editBtn)
+
 
 
 

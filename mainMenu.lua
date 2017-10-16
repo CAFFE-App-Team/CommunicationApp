@@ -179,23 +179,7 @@ gridDisplayed=gridDisplayed-1
 
 end
 
-local arrowWidth=30
-local arrowHeight=arrowWidth*3.566
 
-
-rightArrow = display.newImageRect( "rightArrow.png",arrowWidth,arrowHeight)
-sceneGroup:insert(rightArrow)
-rightArrow.x=390
-rightArrow.y=200
-rightArrow:addEventListener( "touch", rightArrowPress )
-
-leftArrow = display.newImageRect( "leftArrow.png",arrowWidth,arrowHeight)
-sceneGroup:insert(leftArrow)
-leftArrow.x=20
-leftArrow.y=200
-leftArrow.alpha=0.7
-leftArrow:addEventListener( "touch", leftArrowPress )
-canPressLeftArrow=false
 
 
 
@@ -490,6 +474,33 @@ if (gameData.homeScreenGridPosition > 1) then
 end  
 
 
+local leftRectangle = display.newRect( 0, 100, 70, 400 )
+leftRectangle:setFillColor( 69/255, 39/255, 160/255 )
+sceneGroup:insert(leftRectangle)
+
+local rightRectangle = display.newRect( 428, 100, 105, 400 )
+rightRectangle:setFillColor( 69/255, 39/255, 160/255 )
+sceneGroup:insert(rightRectangle)
+
+
+local arrowWidth=30
+local arrowHeight=arrowWidth*3.566
+
+
+rightArrow = display.newImageRect( "rightArrow.png",arrowWidth,arrowHeight)
+sceneGroup:insert(rightArrow)
+rightArrow.x=390
+rightArrow.y=200
+rightArrow:addEventListener( "touch", rightArrowPress )
+
+leftArrow = display.newImageRect( "leftArrow.png",arrowWidth,arrowHeight)
+sceneGroup:insert(leftArrow)
+leftArrow.x=20
+leftArrow.y=200
+leftArrow.alpha=0.7
+leftArrow:addEventListener( "touch", leftArrowPress )
+canPressLeftArrow=false
+
 
 
 gridDisplayed = gameData.homeScreenGridPosition
@@ -518,6 +529,12 @@ gridDisplayed = gameData.homeScreenGridPosition
           leftArrow.alpha=0.7
 
         end
+
+
+
+
+
+
 
 end
 
