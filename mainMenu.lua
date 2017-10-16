@@ -12,6 +12,7 @@ local scene = composer.newScene()
  
  local buttons={}
 
+-- test
 
 local iconMax=10
  local rightArrow
