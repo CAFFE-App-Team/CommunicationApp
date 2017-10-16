@@ -371,7 +371,7 @@ end
 buttons[1]:addEventListener( "touch", loadScreen )
 
 
- buttons[2] = display.newImageRect("category/home.png", size,size)
+ buttons[2] = display.newImageRect("category/toys.png", size,size)
  buttons[2].x = startX+gap
  buttons[2].y = startY
   buttons[2].name = "toysScreen"
