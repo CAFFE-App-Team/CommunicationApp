@@ -4,10 +4,6 @@ local loadsave = require( "loadsave" )
 local barScene = require "barScene"
  
 local scene = composer.newScene()
-
---[[I am making some changes--]]
-
--- made a change for git
  
 -- -----------------------------------------------------------------------------------
 -- Code outside of the scene event functions below will only be executed ONCE unless
@@ -31,7 +27,7 @@ local iconMax=10
 
  local gridDisplayed=1
 
- local numberOfGrids = 3
+ local numberOfGrids = 4
  
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
@@ -217,7 +213,7 @@ canPressLeftArrow=false
 
 local name = event.target.name
 
-if (name=="homeScreen") then
+if (name=="amarJoti") then
 
 
 --gameData.workingScreen = gameData.homeScreen
@@ -229,7 +225,7 @@ gameData.enterEditMode=true
 composer.gotoScene( "game", options ) 
 
 
-elseif (name=="schoolScreen") then
+elseif (name=="toysScreen") then
 
     --gameData.workingScreen = gameData.schoolScreen
     --gameData.saveFile="schoolScreen"
@@ -280,7 +276,7 @@ elseif (name=="emotionScreen") then
 
 composer.gotoScene( "game", options ) 
 
-elseif (name=="questionScreen") then
+elseif (name=="banglaSorbornoScreen") then
 
     --gameData.workingScreen = gameData.emergencyScreen
     --gameData.saveFile="emergencyScreen"
@@ -292,7 +288,7 @@ composer.gotoScene( "game", options )
 
 
 
-elseif (name=="timeScreen") then
+elseif (name=="banglaBenjorbornoScreen") then
 
     --gameData.workingScreen = gameData.emergencyScreen
     --gameData.saveFile="emergencyScreen"
@@ -303,7 +299,7 @@ elseif (name=="timeScreen") then
 composer.gotoScene( "game", options )
 
 
-elseif (name=="banglaSorbornoScreen") then
+elseif (name=="colourScreen") then
 
     --gameData.workingScreen = gameData.emergencyScreen
     --gameData.saveFile="emergencyScreen"
@@ -314,7 +310,7 @@ elseif (name=="banglaSorbornoScreen") then
 composer.gotoScene( "game", options ) 
 
 
-elseif (name=="banglaBenjorbornoScreen") then
+elseif (name=="englishLetterScreen") then
 
     --gameData.workingScreen = gameData.emergencyScreen
     --gameData.saveFile="emergencyScreen"
@@ -326,7 +322,7 @@ composer.gotoScene( "game", options )
 
  
 
-elseif (name=="colourScreen") then
+elseif (name=="englishNumberScreen") then
 
     --gameData.workingScreen = gameData.emergencyScreen
     --gameData.saveFile="emergencyScreen"
@@ -334,7 +330,28 @@ elseif (name=="colourScreen") then
 
     gameData.enterEditMode=true 
 
-composer.gotoScene( "game", options ) 
+composer.gotoScene( "number", options )
+
+
+-- elseif (name=="foodScreen") then
+
+--     --gameData.workingScreen = gameData.emergencyScreen
+--     --gameData.saveFile="emergencyScreen"
+--     gameData.screenIndex=12
+
+--     gameData.enterEditMode=true 
+
+-- composer.gotoScene( "game", options ) 
+
+elseif (name=="commonScreen") then
+
+    --gameData.workingScreen = gameData.emergencyScreen
+    --gameData.saveFile="emergencyScreen"
+    gameData.screenIndex=12
+
+    gameData.enterEditMode=true 
+
+composer.gotoScene( "game", options )  
 
 
 end 
@@ -350,19 +367,19 @@ end
  local startY = 200
  local gap = 80   
  
- buttons[1] = display.newImageRect( "category/home.png", size,size)
+ buttons[1] = display.newImageRect( "category/school.png", size,size)
  buttons[1].x = startX
  buttons[1].y = startY
- buttons[1].name = "homeScreen"
+ buttons[1].name = "amarJoti"
  screenGrid[1]:insert(buttons[1])
 
 buttons[1]:addEventListener( "touch", loadScreen )
 
 
- buttons[2] = display.newImageRect("category/school.png", size,size)
+ buttons[2] = display.newImageRect("category/home.png", size,size)
  buttons[2].x = startX+gap
  buttons[2].y = startY
-  buttons[2].name = "schoolScreen"
+  buttons[2].name = "toysScreen"
  screenGrid[1]:insert(buttons[2])
   buttons[2]:addEventListener( "touch", loadScreen )
 
@@ -375,69 +392,86 @@ buttons[1]:addEventListener( "touch", loadScreen )
 
 
 
-  buttons[4] = display.newImageRect( "category/bengaliNumbers.png",size,size)
+ buttons[4] = display.newImageRect( "category/bengaliNumbers.png",size,size)
  buttons[4].x = startX+(3*gap)
  buttons[4].y = startY
-  buttons[4].name = "banglaNumberScreen"
+ buttons[4].name = "banglaNumberScreen"
  screenGrid[1]:insert(buttons[4])
-  buttons[4]:addEventListener( "touch", loadScreen )
+ buttons[4]:addEventListener( "touch", loadScreen )
 
     local nextScreen = 465
 
-    buttons[5] = display.newImageRect( "category/action.png",size,size)
-  buttons[5].x = startX+nextScreen
+ buttons[5] = display.newImageRect( "category/action.png",size,size)
+ buttons[5].x = startX+nextScreen
  buttons[5].y = startY
-  buttons[5].name = "actionScreen"
+ buttons[5].name = "actionScreen"
  screenGrid[2]:insert(buttons[5])
-  buttons[5]:addEventListener( "touch", loadScreen )
+ buttons[5]:addEventListener( "touch", loadScreen )
 
-    buttons[6] = display.newImageRect( "category/emotion.png",size,size)
+ buttons[6] = display.newImageRect( "category/emotion.png",size,size)
  buttons[6].x = startX+nextScreen+gap
  buttons[6].y = startY
-  buttons[6].name = "emotionScreen"
+ buttons[6].name = "emotionScreen"
  screenGrid[2]:insert(buttons[6])
-  buttons[6]:addEventListener( "touch", loadScreen )
+ buttons[6]:addEventListener( "touch", loadScreen )
 
-    buttons[7] = display.newImageRect( "category/question.png",size,size)
+ buttons[7] = display.newImageRect( "category/bengalilLettersShorborno.png",size,size)
  buttons[7].x = startX+nextScreen+(2*gap)
  buttons[7].y = startY
-  buttons[7].name = "questionScreen"
+ buttons[7].name = "banglaSorbornoScreen"
  screenGrid[2]:insert(buttons[7])
-  buttons[7]:addEventListener( "touch", loadScreen )
+ buttons[7]:addEventListener( "touch", loadScreen )
 
-  buttons[8] = display.newImageRect( "category/time.png",size,size)
+ buttons[8] = display.newImageRect( "category/bengalilLettersBenjonborno.png",size,size)
  buttons[8].x = startX+nextScreen+(3*gap)
  buttons[8].y = startY
-  buttons[8].name = "timeScreen"
+ buttons[8].name = "banglaBenjorbornoScreen"
  screenGrid[2]:insert(buttons[8])
-  buttons[8]:addEventListener( "touch", loadScreen )
+ buttons[8]:addEventListener( "touch", loadScreen )
 
   nextScreen = 465*2
 
- buttons[9] = display.newImageRect( "category/bengalilLettersShorborno.png",size,size)
+ buttons[9] = display.newImageRect( "category/colours.png",size,size)
  --buttons[9].alpha=0.6
- buttons[9].x = startX+nextScreen+gap
+ buttons[9].x = startX+nextScreen
  buttons[9].y = startY
- buttons[9].name = "banglaSorbornoScreen"
+ buttons[9].name = "colourScreen"
  screenGrid[3]:insert(buttons[9])
  buttons[9]:addEventListener( "touch", loadScreen )
 
 
- buttons[10] = display.newImageRect( "category/bengalilLettersBenjonborno.png",size,size)
+ buttons[10] = display.newImageRect( "category/englishLetters.png",size,size)
  --buttons[10].alpha=0.6
- buttons[10].x = startX+nextScreen+(2*gap)
+ buttons[10].x = startX+nextScreen+(1*gap)
  buttons[10].y = startY
- buttons[10].name = "banglaBenjorbornoScreen"
+ buttons[10].name = "englishLetterScreen"
  screenGrid[3]:insert(buttons[10])
  buttons[10]:addEventListener( "touch", loadScreen )
   
 
- buttons[11] = display.newImageRect( "category/colours.png",size,size)
- buttons[11].x = startX+nextScreen+(3*gap)
+ buttons[11] = display.newImageRect( "category/englishNumbers.png",size,size)
+ buttons[11].x = startX+nextScreen+(2*gap)
  buttons[11].y = startY
- buttons[11].name = "colourScreen"
+ buttons[11].name = "englishNumberScreen"
  screenGrid[3]:insert(buttons[11])
  buttons[11]:addEventListener( "touch", loadScreen )
+
+
+ -- buttons[12] = display.newImageRect( "category/colours.png",size,size)
+ -- buttons[12].x = startX+nextScreen+(3*gap)
+ -- buttons[12].y = startY
+ -- buttons[12].name = "foodScreen"
+ -- screenGrid[3]:insert(buttons[12])
+ -- buttons[12]:addEventListener( "touch", loadScreen )
+
+-- nextScreen = 465*3
+
+ buttons[12] = display.newImageRect( "category/colours.png",size,size)
+ buttons[12].x = startX+nextScreen+(3*gap)
+ buttons[12].y = startY
+ buttons[12].name = "commonScreen"
+ screenGrid[3]:insert(buttons[12])
+ buttons[12]:addEventListener( "touch", loadScreen )
 
 print ("grids is "..numberOfGrids)
 

@@ -280,6 +280,11 @@ if (gameData.workingScreen==gameData.banglaSorbornoScreen) then
    --iconImage.y = startY - 10*iconScale
  end
     
+  if (gameData.workingScreen==gameData.englishLetterScreen) then
+   print("it is working")
+   pictureScale=70
+   --iconImage.y = startY - 10*iconScale
+ end   
 
 for icon = 1, #gameData.workingScreen do
 
@@ -932,6 +937,12 @@ end
    print("it is working")
    --pictureScale=70
    iconImage.y = startY - 10*iconScale
+ end
+
+   if (gameData.workingScreen==gameData.englishLetterScreen) then
+   print("it is working")
+   --pictureScale=70
+   iconImage.y = startY - 5*iconScale
  end
 
    -- if (gameData.homeScreen[indexRequired].image=="non") then

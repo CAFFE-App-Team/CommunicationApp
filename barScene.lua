@@ -34,6 +34,10 @@ local topIcons = {}
 
     local double=""
 local hundred=""
+
+local englishFolder=""
+
+
    
 
     local bg = display.newRect (display.contentWidth-40, 65, 80,80)
@@ -168,6 +172,16 @@ local function  playSentence( wordStart )
 
 local scrollPlace
 
+if (gameData.screenIndex==11) then
+
+  englishFolder="english/"
+
+else
+
+  englishFolder=""
+
+end
+
 wordCount = wordStart
 scrollPlace = wordCount
 
@@ -252,7 +266,7 @@ scrollPlace = wordCount
          end
 
         local soundToPlay = nil
-           soundToPlay = audio.loadSound( "voice/"..double..".mp3", {channel=2} )
+           soundToPlay = audio.loadSound( "voice/"..englishFolder..double..".mp3", {channel=2} )
 
           if (soundToPlay==nil)then
                soundToPlay = audio.loadSound( "sounds/"..double..".wav", system.DocumentsDirectory )
@@ -389,7 +403,7 @@ local hundredFlag=false
          end
 
         local soundToPlay = nil
-           soundToPlay = audio.loadSound( "voice/"..hundred..".mp3", {channel=2} )
+           soundToPlay = audio.loadSound( "voice/"..englishFolder..hundred..".mp3", {channel=2} )
 
           if (soundToPlay==nil)then
                soundToPlay = audio.loadSound( "sounds/"..hundred..".wav", system.DocumentsDirectory )
@@ -404,7 +418,7 @@ local hundredFlag=false
            midReading=true
 
         local soundToPlay = nil
-           soundToPlay = audio.loadSound( "voice/"..double..".mp3", {channel=2} )
+           soundToPlay = audio.loadSound( "voice/"..englishFolder..double..".mp3", {channel=2} )
 
           if (soundToPlay==nil)then
                soundToPlay = audio.loadSound( "sounds/"..double..".wav", system.DocumentsDirectory )
@@ -434,7 +448,7 @@ local hundredFlag=false
          end
 
         local soundToPlay = nil
-           soundToPlay = audio.loadSound( "voice/"..double..".mp3", {channel=2} )
+           soundToPlay = audio.loadSound( "voice/"..englishFolder..double..".mp3", {channel=2} )
 
           if (soundToPlay==nil)then
                soundToPlay = audio.loadSound( "sounds/"..double..".wav", system.DocumentsDirectory )
@@ -460,7 +474,7 @@ local hundredFlag=false
          end
 
         local soundToPlay = nil
-           soundToPlay = audio.loadSound( "voice/"..sentenceBuilder[wordCount]..".mp3", {channel=2} )
+           soundToPlay = audio.loadSound( "voice/"..englishFolder..sentenceBuilder[wordCount]..".mp3", {channel=2} )
 
           if (soundToPlay==nil)then
                soundToPlay = audio.loadSound( "sounds/"..sentenceBuilder[wordCount]..".wav", system.DocumentsDirectory )
@@ -525,6 +539,16 @@ local function playTopIcon( event )
 
 local icon = event.target
 
+if (gameData.screenIndex==11) then
+
+  englishFolder="english/"
+
+else
+
+  englishFolder=""
+
+end
+
     local function wordFinished( event )
       print( "Narration Finished on channel", event.channel )
       if ( event.completed ) then
@@ -559,7 +583,7 @@ if(event.phase == "began" and midReading==false) then
            local soundName = event.target.myAudio
 
         local soundToPlay = nil
-           soundToPlay = audio.loadSound( "voice/"..soundName..".mp3", {channel=2} )
+           soundToPlay = audio.loadSound( "voice/"..englishFolder..soundName..".mp3", {channel=2} )
 
           if (soundToPlay==nil)then
                soundToPlay = audio.loadSound( "sounds/"..soundName..".wav", system.DocumentsDirectory )
@@ -573,6 +597,16 @@ if(event.phase == "began" and midReading==false) then
 end
 
 local function insertTopImage (mainIcon)
+
+  if (gameData.screenIndex==11) then
+
+  englishFolder="english/"
+
+else
+
+  englishFolder=""
+
+end
 
   if (topIconIndex<10) then
 
@@ -707,7 +741,7 @@ insertTopImage(event.target)
            local soundName = event.target.myAudio
 
         local soundToPlay = nil
-           soundToPlay = audio.loadSound( "voice/"..soundName..".mp3", {channel=2} )
+           soundToPlay = audio.loadSound( "voice/"..englishFolder..soundName..".mp3", {channel=2} )
 
           if (soundToPlay==nil)then
                soundToPlay = audio.loadSound( "sounds/"..soundName..".wav", system.DocumentsDirectory )
