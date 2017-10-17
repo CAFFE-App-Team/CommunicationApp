@@ -451,7 +451,7 @@ gameData.defaultImages = {
                           ,"plate","ruler","specialChair","spoon","stool","switch","table","toylet","1","2","3","4","5","6","7","8","9","0"
                       }
 
-gameData.englishBangla ={"ma","মা",  "baba","বাবা",  "bhai","ভাই",  }
+gameData.englishBangla ={"ma","মা",  "baba","বাবা",  "bhai","ভাই",    "bhon","বোন"  }
 
 gameData.defaultSounds = {"ma","baba","bhai","bhon","bichana","khudarto","toilet",
                           "shikhok","boi","table","pencil","betha","matha","pet","dukho","khushi",
@@ -495,6 +495,18 @@ gameData.defaultSoundsBangla = {"মা","বাবা","ভাই","বো�
                           "ভাঙা","ভূগোল","বেসিন ","বাটি","বেঞ্চ","ঘড়ি","গ্লাস","থালা","বিশেষ চেয়ার","চামচ","টুল","সুইচ",
                           "খেলনা গাড়ি","খেলনা","খেলনা পুতুল","খেলনা ক্যাঙ্গারু","খেলনা সিংহ","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Zero"
                         }
+
+for splitEng = 1, #gameData.englishBangla,2 do
+
+    print ("english "..gameData.englishBangla[splitEng])
+
+end
+
+for splitBang = 2, #gameData.englishBangla,2 do
+
+    print ("bangla "..gameData.englishBangla[splitBang])
+
+end
 
 
 return gameData
