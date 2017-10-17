@@ -93,6 +93,7 @@ local collRect = {}
 
  local gridDisplayed=1
 
+local quickBtnLink
 
 
  
@@ -264,6 +265,18 @@ if (gameData.workingScreen==gameData.banglaSorbornoScreen) then
    pictureScale=70
    --iconImage.y = startY - 10*iconScale
  end   
+
+   if (gameData.workingScreen==gameData.commonScreen) then
+   print("it is common")
+   quickBtnLink=gameData.lastScreenIndex
+ else
+  -- this will need changing if common screen position changes!!!
+  quickBtnLink=12
+
+ end  
+
+ gameData.lastScreenIndex = gameData.screenIndex
+
 
 for icon = 1, #gameData.workingScreen do
 
@@ -976,6 +989,30 @@ composer.gotoScene( "mainMenu", options )
     return true
   end
 
+local function quickScreen( event )
+    if ( event.phase == "began" ) then
+local options =
+{
+    effect = "crossFade",
+    time = 400
+
+
+}
+
+    gameData.screenIndex=quickBtnLink
+
+    gameData.enterEditMode=true 
+
+    print ("my screen index to go to is "..gameData.screenIndex)
+
+--composer.removeScene("game")
+--composer.gotoScene("game", {effect="crossFade", time=400})
+composer.gotoScene( "dummy", options ) 
+
+    end
+    return true
+  end
+
 
 
 local function onImageTouch( event )
@@ -1273,14 +1310,22 @@ editBtn:addEventListener("touch", handleButtonEvent)
 
 
 local homeWidth = 55
-local homeHeight = homeWidth * 1.32
+--local homeHeight = homeWidth * 1.32
+local homeHeight = homeWidth * .8
 
 local previousBtn = display.newImageRect("homeBtn.png", homeWidth,homeHeight)
 previousBtn.x=display.contentWidth-35
-previousBtn.y=240
+previousBtn.y=215
 --imageGroup:insert(previousBtn)
 
 previousBtn:addEventListener("touch", previousScreen)
+
+local quickBtn = display.newImageRect("homeBtn.png", homeWidth,homeHeight)
+quickBtn.x=display.contentWidth-35
+quickBtn.y=265
+--imageGroup:insert(previousBtn)
+
+quickBtn:addEventListener("touch", quickScreen)
 
 if (gameData.enterEditMode==true) then
   enterEditMode()
@@ -1365,6 +1410,7 @@ function scene:show( event )
         -- Code here runs when the scene is entirely on screen
 
          composer.removeScene( "mainMenu")
+         composer.removeScene("dummy")
          canCollide=true
  
     end

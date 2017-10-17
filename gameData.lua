@@ -18,6 +18,7 @@ gameData.indexEdit = 0
 gameData.screenList = {}
 
 gameData.screenIndex = 1
+gameData.lastScreenIndex = 12
 
 gameData.screenGridPositions = {}
 

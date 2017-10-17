@@ -771,6 +771,11 @@ end
 
 end  
 
+function setQuickButton()
+
+
+end
+
 
 function insertToScene(theScene)
 
