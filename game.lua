@@ -1266,7 +1266,7 @@ end
 local editBtn = display.newImageRect("editBtn.png", 25,25)
 editBtn.x=13
 editBtn.y=display.contentHeight-38
-imageGroup:insert(editBtn)
+--imageGroup:insert(editBtn)
 
 editBtn:addEventListener("touch", handleButtonEvent)
 
@@ -1298,7 +1298,7 @@ if (gameData.screenGridPositions [gameData.screenIndex]>1) then
 end  
 
 sceneGroup:insert(imageGroup)
-sceneGroup:insert(editBtn)
+
 
 local leftRectangle = display.newRect( 0, 100, 70, 400 )
 leftRectangle:setFillColor( 69/255, 39/255, 160/255 )
@@ -1311,6 +1311,7 @@ sceneGroup:insert(rightRectangle)
 sceneGroup:insert(leftArrow)
 sceneGroup:insert(rightArrow)
 sceneGroup:insert(previousBtn)
+sceneGroup:insert(editBtn)
 
 local gridsNeeded = math.ceil(#gameData.workingScreen/iconMax)
 
