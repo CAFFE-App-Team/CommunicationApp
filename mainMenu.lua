@@ -29,6 +29,8 @@ local iconMax=10
  local gridDisplayed=1
 
  local numberOfGrids = 3
+
+ local canTouch=true
  
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
@@ -112,11 +114,15 @@ end
       gameData.homeScreenGridPosition = gridDisplayed
       loadsave.saveTable (gameData.homeScreenGridPosition, "homeScreenGridPosition.json" )
 
+      canTouch=true
+
      end 
 
   if ( event.phase == "began" ) then
 
-      if (canPressRightArrow) then
+      if (canPressRightArrow and canTouch) then
+
+      canTouch=false  
 
       canPressRightArrow=false
 
@@ -157,11 +163,15 @@ end
       gameData.homeScreenGridPosition = gridDisplayed
       loadsave.saveTable (gameData.homeScreenGridPosition, "homeScreenGridPosition.json" )
 
+      canTouch=true
+
      end 
 
     if ( event.phase == "began" ) then
 
-if (canPressLeftArrow) then
+if (canPressLeftArrow and canTouch) then
+
+  canTouch=false
 
   canPressLeftArrow=false
 
@@ -187,6 +197,8 @@ end
 
  local function loadScreen( event )
     if ( event.phase == "began" ) then
+
+      if (canTouch) then
     
         local options =
 {
@@ -354,6 +366,8 @@ end
  
 
     end
+
+  end
     return true
  end  
 

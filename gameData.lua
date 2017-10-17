@@ -29,6 +29,8 @@ gameData.isNumberScreen=false
 gameData.changeSoundName=false
 gameData.showSoundName=""
 
+gameData.canTouch = true
+
 
 gameData.amarJoti = {
 

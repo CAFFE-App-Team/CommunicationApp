@@ -93,6 +93,8 @@ local collRect = {}
 
  local gridDisplayed=1
 
+
+
  
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
@@ -329,11 +331,15 @@ end
       gameData.screenGridPositions[gameData.screenIndex] = gridDisplayed
       loadsave.saveTable (gameData.screenGridPositions, "screenGridPositions.json" )
 
+      gameData.canTouch=true
+
      end 
 
   if ( event.phase == "began" ) then
 
-      if (canPressRightArrow) then
+      if (canPressRightArrow and gameData.canTouch) then
+
+        gameData.canTouch=false
 
       canPressRightArrow=false
 
@@ -374,11 +380,15 @@ end
       gameData.screenGridPositions[gameData.screenIndex] = gridDisplayed
       loadsave.saveTable (gameData.screenGridPositions, "screenGridPositions.json" )
 
+      gameData.canTouch=true
+
      end 
 
     if ( event.phase == "began" ) then
 
-if (canPressLeftArrow) then
+if (canPressLeftArrow and gameData.canTouch) then
+
+  gameData.canTouch=false
 
   canPressLeftArrow=false
 
@@ -669,6 +679,10 @@ local platformDockY = platformTouched.dockY
 
    
         if (event.phase == "began") then
+
+
+      
+
                 display.getCurrentStage():setFocus( platformTouched )
  
    -- here the first position is stored in x and y         
@@ -697,7 +711,9 @@ local platformDockY = platformTouched.dockY
 
                     checkAllCollisions(platformTouched)
                        
-                end
+                
+
+              end
                  return true
         end
 

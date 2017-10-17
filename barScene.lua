@@ -730,6 +730,8 @@ function buildSentence(event)
 
  if(event.phase == "began") then
 
+  if (gameData.canTouch) then
+
 --  print ("ind "..event.target.currentIndex)
 
 insertTopImage(event.target)
@@ -764,6 +766,8 @@ insertTopImage(event.target)
         
 
  end 
+
+end
 
 end  
 
