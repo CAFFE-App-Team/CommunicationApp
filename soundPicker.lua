@@ -220,6 +220,8 @@ checkMarks[i]:addEventListener("touch", setSound)
 local soundLabel = display.newText(  gameData.defaultSoundsBangla[i], imageBoxes[i].x, imageBoxes[i].y+40, native.systemFont, 16 )  
 scrollView:insert(soundLabel)
 
+print ("my index for bangla sound text is "..i)
+
 startX=startX+70
 
    if (i % 5 == 0) then

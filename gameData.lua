@@ -451,6 +451,8 @@ gameData.defaultImages = {
                           ,"plate","ruler","specialChair","spoon","stool","switch","table","toylet","1","2","3","4","5","6","7","8","9","0"
                       }
 
+gameData.englishBangla ={"ma","মা",  "baba","বাবা",  "bhai","ভাই",  }
+
 gameData.defaultSounds = {"ma","baba","bhai","bhon","bichana","khudarto","toilet",
                           "shikhok","boi","table","pencil","betha","matha","pet","dukho","khushi",
                           "aro","alo","amake","amar","ami","apni","asa","aste","badami","bag","bangla",
