@@ -361,6 +361,7 @@ elseif (name=="commonScreen") then
 composer.gotoScene( "game", options )  
 
 
+
 end 
 
  

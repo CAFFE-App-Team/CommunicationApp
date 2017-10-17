@@ -18,6 +18,7 @@ gameData.indexEdit = 0
 gameData.screenList = {}
 
 gameData.screenIndex = 1
+gameData.lastScreenIndex = 12
 
 gameData.screenGridPositions = {}
 
@@ -449,6 +450,8 @@ gameData.defaultImages = {
                           "Nnnnn","Ooo","Pp","Qq","Rr","Ss","Tt","Uu","Vv","Ww","Xx","Yy","Zz","basin","bati","bench","chair","clock","computer1","door1","fan","glass"
                           ,"plate","ruler","specialChair","spoon","stool","switch","table","toylet","1","2","3","4","5","6","7","8","9","0"
                       }
+
+gameData.englishBangla ={"ma","মা",  "baba","বাবা",  "bhai","ভাই",  }
 
 gameData.defaultSounds = {"ma","baba","bhai","bhon","bichana","khudarto","toilet",
                           "shikhok","boi","table","pencil","betha","matha","pet","dukho","khushi",
