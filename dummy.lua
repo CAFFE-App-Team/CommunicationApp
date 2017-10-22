@@ -22,7 +22,23 @@ function scene:create( event )
     local sceneGroup = self.view
     -- Code here runs when the scene is first created but has not yet appeared on screen
 composer.removeScene("game")
-composer.gotoScene("game", {effect="crossFade", time=400})
+composer.removeScene("number")
+
+
+if (gameData.screenIndex == 2 or gameData.screenIndex == 3) then
+
+    gameData.enterEditMode=true 
+
+    composer.gotoScene("number", {effect="crossFade", time=400})
+
+  else
+
+    gameData.enterEditMode=true 
+
+    composer.gotoScene("game", {effect="crossFade", time=400})
+
+  end
+
 
 
 end

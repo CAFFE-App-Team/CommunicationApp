@@ -95,6 +95,8 @@ local collRect = {}
 
 local quickBtnLink
 
+local quickBtnImage
+
 
  
 -- -----------------------------------------------------------------------------------
@@ -245,7 +247,7 @@ end
 
 
 
-    gameData.workingScreen=gameData.screenList[gameData.screenIndex]
+    gameData.workingScreen=gameData.screenList[gameData.screenIndex].screen
 
 
 if (gameData.workingScreen==gameData.banglaSorbornoScreen) then
@@ -269,9 +271,11 @@ if (gameData.workingScreen==gameData.banglaSorbornoScreen) then
    if (gameData.workingScreen==gameData.commonScreen) then
    print("it is common")
    quickBtnLink=gameData.lastScreenIndex
+   quickBtnImage = "returnArrow.png"
  else
   -- this will need changing if common screen position changes!!!
-  quickBtnLink=12
+  quickBtnLink=1
+  quickBtnImage = "category/common.png"
 
  end  
 
@@ -1320,7 +1324,7 @@ previousBtn.y=215
 
 previousBtn:addEventListener("touch", previousScreen)
 
-local quickBtn = display.newImageRect("homeBtn.png", homeWidth,homeHeight)
+local quickBtn = display.newImageRect(quickBtnImage, homeWidth,homeHeight)
 quickBtn.x=display.contentWidth-35
 quickBtn.y=265
 --imageGroup:insert(previousBtn)
@@ -1357,6 +1361,7 @@ sceneGroup:insert(leftArrow)
 sceneGroup:insert(rightArrow)
 sceneGroup:insert(previousBtn)
 sceneGroup:insert(editBtn)
+sceneGroup:insert(quickBtn)
 
 local gridsNeeded = math.ceil(#gameData.workingScreen/iconMax)
 

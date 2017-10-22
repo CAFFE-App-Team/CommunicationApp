@@ -418,15 +418,28 @@ gameData.workingScreenNumber = {
 }
 
 
-  gameData.screenList = {gameData.amarJoti, gameData.toysScreen, 
+  gameData.screenList = {
 
-  gameData.peopleScreen, gameData.banglaNumberScreen, gameData.actionScreen,
+  {screen=gameData.commonScreen, name="commonScreen"},
+  {screen=gameData.banglaNumberScreen, name="banglaNumberScreen"},
+  {screen=gameData.englishNumberScreen, name="englishNumberScreen"},
+  {screen=gameData.banglaSorbornoScreen, name="banglaSorbornoScreen"},
+  {screen=gameData.banglaBenjorbornoScreen, name="banglaBenjorbornoScreen"},
+  {screen=gameData.englishLetterScreen, name="englishLetterScreen"},
+  {screen=gameData.amarJoti, name="amarJoti"},
+  {screen=gameData.toysScreen, name="toysScreen"},
+  {screen=gameData.peopleScreen, name="peopleScreen"},
+  {screen=gameData.actionScreen, name="actionScreen"},
+  {screen=gameData.emotionScreen, name="emotionScreen"},
+  {screen=gameData.colourScreen, name="colourScreen"}
+  
 
-  gameData.emotionScreen, gameData.banglaSorbornoScreen, gameData.banglaBenjorbornoScreen, 
 
-  gameData.colourScreen, gameData.englishLetterScreen, gameData.englishNumberScreen,  gameData.commonScreen
+  
+ 
 
- }
+  }
+
 
 
  for sgp = 1, #gameData.screenList do

@@ -210,159 +210,26 @@ end
 
 local name = event.target.name
 
-if (name=="amarJoti") then
 
+for match = 1, #gameData.screenList do
+  if (gameData.screenList[match].name == name) then
+    gameData.screenIndex=match
+  end
+end
 
---gameData.workingScreen = gameData.homeScreen
---gameData.saveFile="homeScreen"
-gameData.screenIndex=1
-
-gameData.enterEditMode=true 
-
-composer.gotoScene( "game", options ) 
-
-
-elseif (name=="toysScreen") then
-
-    --gameData.workingScreen = gameData.schoolScreen
-    --gameData.saveFile="schoolScreen"
-    gameData.screenIndex=2
+if (gameData.screenIndex == 2 or gameData.screenIndex == 3) then
 
     gameData.enterEditMode=true 
 
-composer.gotoScene( "game", options ) 
+    composer.gotoScene( "number", options ) 
 
-
-elseif (name=="peopleScreen") then
-
-    --gameData.workingScreen = gameData.emergencyScreen
-    --gameData.saveFile="emergencyScreen"
-    gameData.screenIndex=3
+  else
 
     gameData.enterEditMode=true 
 
-composer.gotoScene( "game", options ) 
+    composer.gotoScene( "game", options ) 
 
-elseif (name=="banglaNumberScreen") then
-
-    --gameData.workingScreen = gameData.emergencyScreen
-    --gameData.saveFile="emergencyScreen"
-    gameData.screenIndex=4
-
-    gameData.enterEditMode=true 
-
-composer.gotoScene( "number", options ) 
-
-elseif (name=="actionScreen") then
-
-    --gameData.workingScreen = gameData.emergencyScreen
-    --gameData.saveFile="emergencyScreen"
-    gameData.screenIndex=5
-
-    gameData.enterEditMode=true 
-
-composer.gotoScene( "game", options ) 
-
-elseif (name=="emotionScreen") then
-
-    --gameData.workingScreen = gameData.emergencyScreen
-    --gameData.saveFile="emergencyScreen"
-    gameData.screenIndex=6
-
-    gameData.enterEditMode=true 
-
-composer.gotoScene( "game", options ) 
-
-elseif (name=="banglaSorbornoScreen") then
-
-    --gameData.workingScreen = gameData.emergencyScreen
-    --gameData.saveFile="emergencyScreen"
-    gameData.screenIndex=7
-
-    gameData.enterEditMode=true 
-
-composer.gotoScene( "game", options ) 
-
-
-
-elseif (name=="banglaBenjorbornoScreen") then
-
-    --gameData.workingScreen = gameData.emergencyScreen
-    --gameData.saveFile="emergencyScreen"
-    gameData.screenIndex=8
-
-    gameData.enterEditMode=true 
-
-composer.gotoScene( "game", options )
-
-
-elseif (name=="colourScreen") then
-
-    --gameData.workingScreen = gameData.emergencyScreen
-    --gameData.saveFile="emergencyScreen"
-    gameData.screenIndex=9
-
-    gameData.enterEditMode=true 
-
-composer.gotoScene( "game", options ) 
-
-
-elseif (name=="englishLetterScreen") then
-
-    --gameData.workingScreen = gameData.emergencyScreen
-    --gameData.saveFile="emergencyScreen"
-    gameData.screenIndex=10
-
-    gameData.enterEditMode=true 
-
-composer.gotoScene( "game", options ) 
-
- 
-
-elseif (name=="englishNumberScreen") then
-
-    --gameData.workingScreen = gameData.emergencyScreen
-    --gameData.saveFile="emergencyScreen"
-    gameData.screenIndex=11
-
-    gameData.enterEditMode=true 
-
-composer.gotoScene( "number", options )
-
-elseif (name=="bengaliNumberScreen") then
-
-    --gameData.workingScreen = gameData.emergencyScreen
-    --gameData.saveFile="emergencyScreen"
-    gameData.screenIndex=4
-
-    gameData.enterEditMode=true 
-
-composer.gotoScene( "number", options )
-
-
--- elseif (name=="foodScreen") then
-
---     --gameData.workingScreen = gameData.emergencyScreen
---     --gameData.saveFile="emergencyScreen"
---     gameData.screenIndex=12
-
---     gameData.enterEditMode=true 
-
--- composer.gotoScene( "game", options ) 
-
-elseif (name=="commonScreen") then
-
-    --gameData.workingScreen = gameData.emergencyScreen
-    --gameData.saveFile="emergencyScreen"
-    gameData.screenIndex=12
-
-    gameData.enterEditMode=true 
-
-composer.gotoScene( "game", options )  
-
-
-
-end 
+  end
 
  
 

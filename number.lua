@@ -88,6 +88,8 @@ local collRect = {}
 
  local gridDisplayed=1
 
+ local quickBtnImage
+
  
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
@@ -241,7 +243,17 @@ print ("i loaded")
 
 
 
-    gameData.workingScreenNumber=gameData.screenList[gameData.screenIndex]
+    gameData.workingScreenNumber=gameData.screenList[gameData.screenIndex].screen
+
+
+  quickBtnLink=1
+  quickBtnImage = "category/common.png"
+
+ 
+
+ gameData.lastScreenIndex = gameData.screenIndex
+
+
 
 for icon = 1, #gameData.workingScreenNumber do
 
@@ -897,7 +909,29 @@ composer.gotoScene( "mainMenu", options )
     return true
   end
 
+local function quickScreen( event )
+    if ( event.phase == "began" ) then
+local options =
+{
+    effect = "crossFade",
+    time = 400
 
+
+}
+
+    gameData.screenIndex=quickBtnLink
+
+    gameData.enterEditMode=true 
+
+    print ("my screen index to go to is "..gameData.screenIndex)
+
+--composer.removeScene("game")
+--composer.gotoScene("game", {effect="crossFade", time=400})
+composer.gotoScene( "dummy", options ) 
+
+    end
+    return true
+  end
 
 local function onImageTouch( event )
     if ( event.phase == "began" ) then
@@ -1193,15 +1227,22 @@ editBtn:addEventListener("touch", handleButtonEvent)--]]
 
 
 local homeWidth = 55
-local homeHeight = homeWidth * 1.32
+--local homeHeight = homeWidth * 1.32
+local homeHeight = homeWidth * .8
 
 
 local previousBtn = display.newImageRect("homeBtn.png", homeWidth,homeHeight)
 previousBtn.x=display.contentWidth-35
-previousBtn.y=240
-imageGroup:insert(previousBtn)
+previousBtn.y=215
+--imageGroup:insert(previousBtn)
 
 previousBtn:addEventListener("touch", previousScreen)
+
+local quickBtn = display.newImageRect(quickBtnImage, homeWidth,homeHeight)
+quickBtn.x=display.contentWidth-35
+quickBtn.y=265
+
+quickBtn:addEventListener("touch", quickScreen)
 
 if (gameData.enterEditMode==true) then
   enterEditMode()
@@ -1256,6 +1297,9 @@ sceneGroup:insert(imageGroup)
 --sceneGroup:insert(editBtn)
 
 
+sceneGroup:insert(previousBtn)
+
+sceneGroup:insert(quickBtn)
 
 end
 
@@ -1272,6 +1316,7 @@ function scene:show( event )
         -- Code here runs when the scene is entirely on screen
 
          composer.removeScene( "mainMenu")
+         composer.removeScene("dummy")
          canCollide=true
  
     end
