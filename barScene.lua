@@ -172,7 +172,8 @@ local function  playSentence( wordStart )
 
 local scrollPlace
 
-if (gameData.screenIndex==11) then
+
+if (gameData.screenIndex==3) then
 
   englishFolder="english/"
 
@@ -539,7 +540,7 @@ local function playTopIcon( event )
 
 local icon = event.target
 
-if (gameData.screenIndex==11) then
+if (gameData.screenIndex==3) then
 
   englishFolder="english/"
 
@@ -598,7 +599,7 @@ end
 
 local function insertTopImage (mainIcon)
 
-  if (gameData.screenIndex==11) then
+  if (gameData.screenIndex==3) then
 
   englishFolder="english/"
 
