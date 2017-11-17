@@ -139,6 +139,8 @@ gameData.peopleScreen = {
 }
 
 
+
+
 gameData.banglaNumberScreen = {
   
  { text="এক", audio="1", image="one", ind=1 },
@@ -388,6 +390,29 @@ gameData.commonScreen = {
 }
 
 
+gameData.storyScreen = {
+  
+ { text="", audio="", image="story1", ind=1 },
+ { text="", audio="", image="story2", ind=2 },
+ { text="", audio="", image="story3", ind=3 },
+ { text="", audio="", image="story4", ind=4 },
+ { text="", audio="", image="story5", ind=5 },
+ { text="", audio="", image="story6", ind=6 },
+ { text="", audio="", image="story7", ind=7 },
+ { text="", audio="", image="story8", ind=8 },
+ { text="", audio="", image="story9", ind=9 },
+ { text="", audio="", image="story10", ind=10 },
+ { text="", audio="", image="story11", ind=11 },
+ { text="", audio="", image="story12", ind=12 },
+ { text="", audio="", image="story13", ind=13 },
+ { text="", audio="", image="non", ind=14 },
+ { text="", audio="", image="non", ind=15 },
+ { text="", audio="", image="non", ind=16 }
+ 
+
+}
+
+
 gameData.workingScreen = {
   
  { text="", audio="", image="", ind=1 },
@@ -417,6 +442,8 @@ gameData.workingScreenNumber = {
 }
 
 
+
+
   gameData.screenList = {
 
   {screen=gameData.commonScreen, name="commonScreen"},
@@ -430,7 +457,9 @@ gameData.workingScreenNumber = {
   {screen=gameData.peopleScreen, name="peopleScreen"},
   {screen=gameData.actionScreen, name="actionScreen"},
   {screen=gameData.emotionScreen, name="emotionScreen"},
-  {screen=gameData.colourScreen, name="colourScreen"}
+  {screen=gameData.colourScreen, name="colourScreen"},
+  {screen=gameData.storyScreen, name="storyScreen"}
+
   
 
 
@@ -460,8 +489,9 @@ gameData.defaultImages = {
                           "a","aa","i","ee","u","oo","ri","ae","aae","o","au","k","kh","g","gh","ng","ch","chh","j","jh","n","t","tth","d","ddh","nn","thho","th","the","thhe","nnn","pa",
                           "pha","ba","bha","maa","ya","ra","la","sa","sshh","haa","rhha","drha","yaa","ktt","onn","bss","chn","Aaaa","Bb","Cc","Dd","Eeee","Ff","Gg","Hh","Ii","Jj","Kk","Ll","Mm",
                           "Nnnnn","Ooo","Pp","Qq","Rr","Ss","Tt","Uu","Vv","Ww","Xx","Yy","Zz","basin","bati","bench","chair","clock","computer1","door1","fan","glass"
-                          ,"plate","ruler","specialChair","spoon","stool","switch","table","toylet","1","2","3","4","5","6","7","8","9","0"
+                          ,"plate","ruler","specialChair","spoon","stool","switch","table","toylet","1","2","3","4","5","6","7","8","9","0","story1","story2","story3","story4","story5","story6","story7","story8","story9","story10","story11","story12","story13"
                       }
+                      
 
 gameData.englishBangla ={"ma","মা",  "baba","বাবা",  "bhai","ভাই",    "bhon","বোন"    ,"bichana","বিছানা",   "khudarto","ক্ষুদার্থ",   "toilet","টয়লেট","shikhok","শিক্ষক",  "boi","বই",  "table","টেবিল",  
                          "pencil","পেন্সিল",  "betha","ব্যথা",  "matha","মাথা",  "pet","পেট",  "dukho","দুঃখ",  "khushi","খুশি",   "aro","আরো",  "alo","আলো",  "amake","আমাকে",  "amar","আমার",  "ami","আমি",
