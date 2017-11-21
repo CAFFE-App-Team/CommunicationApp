@@ -1270,7 +1270,7 @@ end
 
       iconGroups[j]:removeEventListener("touch", buildSentence)
 
-      print ("ig aud "..iconGroups[j].myAudio)
+     
 
       if (iconGroups[j].myAudio ~="") then
       iconGroups[j]:addEventListener("touch", movePlatform)
