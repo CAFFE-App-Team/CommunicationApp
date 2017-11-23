@@ -28,6 +28,8 @@ local scene = composer.newScene()
  local iMayPlay=true
 
  local side = -20
+
+ local canPress=true
  
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
@@ -186,7 +188,7 @@ end
 
 local function closeEditView(  )
  
- -- if ( event.phase == "began" ) then
+  --if ( event.phase == "began" ) then
 
 print ("go")
 
@@ -203,6 +205,7 @@ gameData.enterEditMode=false
 composer.hideOverlay( "fade", 400 )
 
 parent:updateBoxes()
+
 
 scene:addEventListener( "hide", scene )
 
@@ -384,6 +387,7 @@ local function playSound(  )
 
     local function onCompleteSound (event)
         iMayPlay=true
+        canPress=true
     end 
 
      --if(event.phase == "began") then
@@ -415,6 +419,10 @@ end
 
 
  local function submitValueOther(event)
+
+    if (canPress) then
+
+        canPress=false
 
     if(event.phase == "began") then
 
@@ -482,6 +490,8 @@ end
     end
 
   end
+
+end
 
 end
 
