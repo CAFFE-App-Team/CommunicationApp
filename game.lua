@@ -339,14 +339,8 @@ if (gridsNeeded>1) then
 
 for grids = 2, gridsNeeded do
 
-  print ('grids '..startXOffset)
-
-  print ("actual "..display.actualContentWidth.." display "..display.contentWidth)
-
 gridX[grids] = ((grids-1)*(display.actualContentWidth))
 
-
-print ('grid x is '..grids..'  '..gridX[grids])
 
 end
 
@@ -498,8 +492,7 @@ end
 
 end
 
-print ("Your Answer is ")
-print (match)
+
 
 if (match==true) then
   local correctWordAudio = audio.loadSound( wordNeeded..".m4a" )
@@ -510,8 +503,6 @@ end
 
 local function hasCollidedCards( obj1, obj2, index1, index2)
 
-print (obj1)
-print (obj2)
 
     if ( obj1 == nil ) then  -- Make sure the first object exists
         return false
@@ -566,8 +557,6 @@ local function checkAllCollisions(movedLetter)
 local boxIndex = movedLetter.myIndex
 local noSwap = false
 
-print ("size ")
-print (boxIndex)
 for collOther = 1, #letterBoxes do
 
 
@@ -621,8 +610,7 @@ if (noSwap==false) then
 for coll = 1, #gameData.workingScreen do
 
  if (hasCollidedCircle(movedLetter, collRect[coll], boxIndex)) then
-print ("coolided")
-print (canCollide)
+
 
   --movedLetter:insert(collRect[coll])
 local actualBoxX, actualBoxY = collRect[coll]:localToContent( 0,0 )
@@ -784,14 +772,14 @@ local loop =-iconMax;
 
 -- outer for loop to set up grid screens
 for gridSetup = 1 , math.ceil(#gameData.workingScreen/iconMax) do
-  print("rounded to set a"..math.ceil(#gameData.workingScreen/iconMax))
+
 
   startX = (startXOffset)+(gridX[gridSetup])
   startY = 150 + startYoffset
 
   loop=loop+iconMax
 
-  print('loop start x '..startX)
+
 
 
     for grid = 1+loop, iconMax+loop do
@@ -812,8 +800,6 @@ for gridSetup = 1 , math.ceil(#gameData.workingScreen/iconMax) do
         gridBoxes[grid].x = startX
         gridBoxes[grid].y = startY
 
-        print ('gridSetup is now '..gridSetup)
-        print ('grid is now '..grid)
 
         screenGrid[gridSetup]:insert(gridBoxes[grid])
 
@@ -838,7 +824,7 @@ end
 loop=-iconMax
 
 for gridSetup = 1 , math.ceil(#gameData.workingScreen/iconMax) do
-  print("rounded to set b"..gridSetup) 
+
 
   startX = (startXOffset)+(gridX[gridSetup])
   startY = 150 + startYoffset
@@ -974,25 +960,25 @@ iconGroups[i]:addEventListener("touch", movePlatform)
 end
 
  if (gameData.workingScreen==gameData.banglaSorbornoScreen) then
-   print("it is working")
+  
    --pictureScale=70
    iconImage.y = startY - 10*iconScale
  end
 
   if (gameData.workingScreen==gameData.banglaBenjorbornoScreen) then
-   print("it is working")
+ 
    --pictureScale=70
    iconImage.y = startY - 10*iconScale
  end
 
    if (gameData.workingScreen==gameData.englishLetterScreen) then
-   print("it is working")
+  
    --pictureScale=70
    iconImage.y = startY - 5*iconScale
  end
 
   if (gameData.workingScreen==gameData.storyScreen) then
-   print("it is working")
+   
    --pictureScale=70
    iconImage.y = startY - 1*iconScale
  end
@@ -1049,7 +1035,7 @@ local options =
 
     gameData.enterEditMode=true 
 
-    print ("my screen index to go to is "..gameData.screenIndex)
+    --print ("my screen index to go to is "..gameData.screenIndex)
 
 --composer.removeScene("game")
 --composer.gotoScene("game", {effect="crossFade", time=400})
@@ -1290,7 +1276,7 @@ end
 
 
   for i=1, #editBtn do
-    print("vis")
+
     editBtn[i].isVisible=true
   end 
 
@@ -1381,7 +1367,7 @@ if (gameData.screenGridPositions [gameData.screenIndex]>1) then
 
   for setUp=1, #screenGrid do
 
-  print (' i moved by '..gameData.screenGridPositions [gameData.screenIndex])
+  --print (' i moved by '..gameData.screenGridPositions [gameData.screenIndex])
 
   screenGrid[setUp].x = screenGrid[setUp].x-(480* (gameData.screenGridPositions [gameData.screenIndex]-1) )
 

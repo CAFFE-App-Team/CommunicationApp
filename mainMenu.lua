@@ -369,7 +369,7 @@ buttons[1]:addEventListener( "touch", loadScreen )
  screenGrid[4]:insert(buttons[13])
  buttons[13]:addEventListener( "touch", loadScreen )--]]
 
-print ("grids is "..numberOfGrids)
+
 
 for addGrids = 1, numberOfGrids do
   sceneGroup:insert(screenGrid[addGrids])
@@ -456,8 +456,6 @@ insertToScene(sceneGroup)
 
             if ( event.phase == "began" ) then
 
-      print ("my scene is ")
-      print(sceneGroup)
 
        insertToScene(sceneGroup)
 

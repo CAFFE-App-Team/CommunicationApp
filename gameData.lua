@@ -565,7 +565,7 @@ for splitEng = 1, #gameData.englishBangla,2 do
     
     gameData.defaultSounds[i] = gameData.englishBangla[splitEng]
 
-    print ("english "..gameData.defaultSounds[i])
+    --print ("english "..gameData.defaultSounds[i])
     i=i+1
 
 end
@@ -577,7 +577,7 @@ for splitBang = 2, #gameData.englishBangla,2 do
     
         gameData.defaultSoundsBangla[j] = gameData.englishBangla[splitBang]
 
-        print ("bangla "..gameData.defaultSoundsBangla[j])
+        --print ("bangla "..gameData.defaultSoundsBangla[j])
     j=j+1
 
 
