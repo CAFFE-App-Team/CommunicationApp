@@ -5,7 +5,6 @@ local widget = require( "widget" )
 local barScene = require "barScene"
 local ImageSize = require "imagesizelua"
 
- 
 local scene = composer.newScene()
  
 -- -----------------------------------------------------------------------------------
