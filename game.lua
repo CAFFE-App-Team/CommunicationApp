@@ -368,7 +368,7 @@ end
         else
 
           canPressRightArrow=false
-          rightArrow.alpha=0.7
+          rightArrow.alpha=0.2
 
 
 
@@ -420,7 +420,7 @@ end
         else
 
           canPressLeftArrow=false
-          leftArrow.alpha=0.7
+          leftArrow.alpha=0.2
 
         end
 
@@ -467,7 +467,7 @@ leftArrow = display.newImageRect( "leftArrow.png",arrowWidth,arrowHeight)
 --imageGroup:insert(leftArrow)
 leftArrow.x=20
 leftArrow.y=200
-leftArrow.alpha=0.7
+leftArrow.alpha=0.2
 leftArrow:addEventListener( "touch", leftArrowPress )
 canPressLeftArrow=false
 
@@ -1421,7 +1421,7 @@ gridDisplayed = gameData.screenGridPositions[gameData.screenIndex]
         else
 
           canPressRightArrow=false
-          rightArrow.alpha=0.7
+          rightArrow.alpha=0.2
 
         end
 
@@ -1433,7 +1433,7 @@ gridDisplayed = gameData.screenGridPositions[gameData.screenIndex]
         else
 
           canPressLeftArrow=false
-          leftArrow.alpha=0.7
+          leftArrow.alpha=0.2
 
         end
 

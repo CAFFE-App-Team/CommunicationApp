@@ -109,7 +109,7 @@ end
         else
 
           canPressRightArrow=false
-          rightArrow.alpha=0.7
+          rightArrow.alpha=0.2
 
 
 
@@ -161,7 +161,7 @@ end
         else
 
           canPressLeftArrow=false
-          leftArrow.alpha=0.7
+          leftArrow.alpha=0.2
 
         end
 
@@ -411,7 +411,7 @@ leftArrow = display.newImageRect( "leftArrow.png",arrowWidth,arrowHeight)
 sceneGroup:insert(leftArrow)
 leftArrow.x=20
 leftArrow.y=200
-leftArrow.alpha=0.7
+leftArrow.alpha=0.2
 leftArrow:addEventListener( "touch", leftArrowPress )
 canPressLeftArrow=false
 
@@ -428,7 +428,7 @@ gridDisplayed = gameData.homeScreenGridPosition
         else
 
           canPressRightArrow=false
-          rightArrow.alpha=0.7
+          rightArrow.alpha=0.2
 
         end
 
@@ -440,7 +440,7 @@ gridDisplayed = gameData.homeScreenGridPosition
         else
 
           canPressLeftArrow=false
-          leftArrow.alpha=0.7
+          leftArrow.alpha=0.2
 
         end
 
@@ -521,6 +521,15 @@ settingsBtn.y=265
 sceneGroup:insert(settingsBtn)
 
 settingsBtn:addEventListener("touch", enterSettings)
+
+
+local commonBtn = display.newImageRect( "category/common.png", 50,50)
+commonBtn.x=display.contentWidth-35
+commonBtn.y=220
+
+sceneGroup:insert(commonBtn)
+
+commonBtn:addEventListener( "touch", loadScreen )
 
 
 
