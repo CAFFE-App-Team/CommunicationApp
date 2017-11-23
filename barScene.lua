@@ -772,6 +772,14 @@ end
 
 end  
 
+-- local commonBtn = display.newImageRect( "category/common.png", 50,50)
+-- commonBtn.x=display.contentWidth-35
+-- commonBtn.y=220
+
+-- sceneGroup:insert(commonBtn)
+
+-- commonBtn:addEventListener( "touch", loadScreen )
+
 function setQuickButton()
 
 
