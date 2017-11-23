@@ -45,6 +45,11 @@ function scene:create( event )
 
 gameData.isNumberScreen=false
 
+gameData.size = loadsave.loadTable( "gridSize.json")
+
+if (gameData.size==nil) then
+  gameData.size="m"
+ end 
 
 
   if (gameData.size=="s") then
@@ -441,6 +446,82 @@ gridDisplayed = gameData.homeScreenGridPosition
 
 
 
+          function scene:resetTopBar()
+
+insertToScene(sceneGroup)
+
+ end 
+
+
+
+    local function enterSettings(event)
+
+            if ( event.phase == "began" ) then
+
+      print ("my scene is ")
+      print(sceneGroup)
+
+       insertToScene(sceneGroup)
+
+      local options =
+{
+     isModal = true,
+    effect = "crossFade",
+    time = 400,
+
+}
+
+composer.showOverlay( "settingsScreen", options )
+
+
+end
+
+return true
+
+
+    end
+
+
+
+
+local function longPressUpdate()
+
+  local timeHeld = os.time() - pressTimer
+  if (timeHeld >= 2 and canFire) then
+    canFire=false
+  print("Held for 2 sec or longer, do something")
+  enterSettings()
+   end 
+
+end  
+
+    
+    local function handleButtonEvent( event )
+        local phase = event.phase
+        if "began" == phase then
+             pressTimer = os.time()
+             canFire=true
+             pressRuntimer = timer.performWithDelay(1, longPressUpdate, -1)
+        elseif "ended" == phase then
+             local timeHeld = os.time() - pressTimer
+             if timeHeld >= 2 then
+                timer.cancel(pressRuntimer)
+             else
+                  print("Held short, do something")
+                  timer.cancel(pressRuntimer)
+             end
+        end
+    end
+
+
+local settingsBtn = display.newImageRect( "settings.png", 20,20)
+settingsBtn.x=display.contentWidth-35
+settingsBtn.y=265
+
+sceneGroup:insert(settingsBtn)
+
+settingsBtn:addEventListener("touch", enterSettings)
+
 
 
 
@@ -462,10 +543,14 @@ function scene:show( event )
         -- Code here runs when the scene is entirely on screen
    composer.removeScene( "game")
    composer.removeScene( "number")
+   composer.removeScene("settingsScreen")
 
    if (gameData.firstRun==true) then
+    print ('CREATE BAR')
    createBar()
    gameData.firstRun=false
+
+
 end
     end
 end

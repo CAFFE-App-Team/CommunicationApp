@@ -81,6 +81,8 @@ local collRect = {}
  local rowCount
  local iconMax
  local startXOffset = -10
+ local startYoffset = 0
+ local addToX = 95
  local startYTable={150,150}
  local startXTable={-15,-15}
  local addX={95}
@@ -128,15 +130,19 @@ local imageGroup = display.newGroup()
 
 if (gameData.size=="s") then
 
-  iconScale=0.8
+  iconScale=0.7
   rowCount=6
   iconMax=10
+  startXOffset = 0
+  addToX = 95
 
   elseif (gameData.size=="m") then
 
       iconScale=0.9
    rowCount=5
    iconMax=8
+   startXOffset = -10
+   addToX=95
 
 
     elseif (gameData.size=="l") then
@@ -144,6 +150,17 @@ if (gameData.size=="s") then
      iconScale=1.1
    rowCount=4
    iconMax=6
+   startXOffset = -15
+   addToX = 95
+
+       elseif (gameData.size=="vl") then
+
+     iconScale=1.2
+   rowCount=3
+   iconMax=3
+   startXOffset = -20
+   addToX = 95
+   startYoffset = 45
 
     end
 
@@ -294,7 +311,9 @@ iconGroups[icon] = display.newGroup()
 
 end
 
-for screenGridCount = 1, #gameData.workingScreen / iconMax do
+--for screenGridCount = 1, #gameData.workingScreen / iconMax do
+
+for screenGridCount = 1, math.ceil(#gameData.workingScreen/iconMax) do
 
 screenGrid[screenGridCount] = display.newGroup()
 
@@ -321,9 +340,14 @@ if (gridsNeeded>1) then
 
 for grids = 2, gridsNeeded do
 
-gridX[grids] = (grids-1)*(display.contentWidth+startXOffset)
+  print ('grids '..startXOffset)
 
-print (gridX[grids])
+  print ("actual "..display.actualContentWidth.." display "..display.contentWidth)
+
+gridX[grids] = ((grids-1)*(display.actualContentWidth))
+
+
+print ('grid x is '..grids..'  '..gridX[grids])
 
 end
 
@@ -372,7 +396,7 @@ end
 
      for i = 1, #screenGrid do
 
-     transition.to( screenGrid[i], { time=400, x=screenGrid[i].x-470, y=screenGrid[i].y, onComplete=scrollComplete } )
+     transition.to( screenGrid[i], { time=400, x=screenGrid[i].x-480, y=screenGrid[i].y, onComplete=scrollComplete } )
    end
 
     end
@@ -420,7 +444,7 @@ gridDisplayed=gridDisplayed-1
     
      for i = 1, #screenGrid do
 
-     transition.to( screenGrid[i], { time=400, x=screenGrid[i].x+470, y=screenGrid[i].y,  onComplete=scrollComplete } )
+     transition.to( screenGrid[i], { time=400, x=screenGrid[i].x+480, y=screenGrid[i].y,  onComplete=scrollComplete } )
    end
 
 
@@ -755,18 +779,18 @@ local platformDockY = platformTouched.dockY
 wordNeeded=theWord
 
  local startX = startXOffset
- local startY = 150
+ local startY = 150 + startYoffset
 
-local loop =-8;
+local loop =-iconMax;
 
 -- outer for loop to set up grid screens
 for gridSetup = 1 , math.ceil(#gameData.workingScreen/iconMax) do
-  print("rounded to set a"..gridSetup)
+  print("rounded to set a"..math.ceil(#gameData.workingScreen/iconMax))
 
   startX = (startXOffset)+(gridX[gridSetup])
-  startY = 150 
+  startY = 150 + startYoffset
 
-  loop=loop+8
+  loop=loop+iconMax
 
   print('loop start x '..startX)
 
@@ -776,12 +800,12 @@ for gridSetup = 1 , math.ceil(#gameData.workingScreen/iconMax) do
          gridBoxes[grid] = display.newImageRect( "blankSlate.png",80*iconScale,80*iconScale)
          
 
-    if (grid==rowCount+loop) then
+    if (rowCount>3 and grid==rowCount+loop) then
         startY = 240
-        startX = (startXOffset+95*iconScale)+(gridX[gridSetup])
+        startX = (startXOffset+addToX*iconScale)+(gridX[gridSetup])
         --startX = -15+95*iconScale
       else
-        startX=startX+(95*iconScale)
+        startX=startX+(addToX*iconScale)
 
 
       end
@@ -789,7 +813,8 @@ for gridSetup = 1 , math.ceil(#gameData.workingScreen/iconMax) do
         gridBoxes[grid].x = startX
         gridBoxes[grid].y = startY
 
-        print ('adds startx '..startX)
+        print ('gridSetup is now '..gridSetup)
+        print ('grid is now '..grid)
 
         screenGrid[gridSetup]:insert(gridBoxes[grid])
 
@@ -809,17 +834,17 @@ imageGroup:insert(screenGrid[gridSetup])
 end
 
    startX = startXOffset
-  startY = 150  
+  startY = 150 + startYoffset
 
-loop=-8
+loop=-iconMax
 
 for gridSetup = 1 , math.ceil(#gameData.workingScreen/iconMax) do
   print("rounded to set b"..gridSetup) 
 
   startX = (startXOffset)+(gridX[gridSetup])
-  startY = 150 
+  startY = 150 + startYoffset
 
-  loop=loop+8 
+  loop=loop+iconMax 
 
 for i = 1+loop, iconMax+loop do
 
@@ -829,10 +854,16 @@ local skip = true
 
 for ind = 1+loop, iconMax+loop do
 
+
+  if (gameData.workingScreen[ind] ~= nil) then
+
   if (i == gameData.workingScreen[ind].ind) then
     indexRequired = ind
     skip = false
   end
+
+end
+
 end
 
  
@@ -840,12 +871,12 @@ end
 
 
  if (skip==true) then
-if (i==rowCount+loop) then
+if (rowCount>3 and i==rowCount+loop) then
     startY = 240
 
-    startX = (startXOffset+95*iconScale)+(gridX[gridSetup])
+    startX = (startXOffset+addToX*iconScale)+(gridX[gridSetup])
   else
-    startX=startX+95*iconScale
+    startX=startX+addToX*iconScale
   end
  end
 
@@ -909,11 +940,11 @@ if (tempImg) then
   iconGroups[i].tablePos = indexRequired
  
 
-if (i==rowCount+loop) then
+if (rowCount>3 and i==rowCount+loop) then
     startY = 240
-    startX = (startXOffset+95*iconScale)+(gridX[gridSetup])
+    startX = (startXOffset+addToX*iconScale)+(gridX[gridSetup])
   else
-    startX=startX+95*iconScale
+    startX=startX+addToX*iconScale
 
   end
 
@@ -1353,7 +1384,7 @@ if (gameData.screenGridPositions [gameData.screenIndex]>1) then
 
   print (' i moved by '..gameData.screenGridPositions [gameData.screenIndex])
 
-  screenGrid[setUp].x = screenGrid[setUp].x-(470* (gameData.screenGridPositions [gameData.screenIndex]-1) )
+  screenGrid[setUp].x = screenGrid[setUp].x-(480* (gameData.screenGridPositions [gameData.screenIndex]-1) )
 
   end
 end  

@@ -783,8 +783,10 @@ function insertToScene(theScene)
 if (gameData.toInsert==true) then
 
 print ("in scene")
+print (theScene)
 
 gameData.toInsert=false
+print (bg)
 theScene:insert(bg)
 theScene:insert(topBar)
 theScene:insert(bottomBar)

@@ -6,7 +6,7 @@ gameData.firstRun=true
 
 gameData.toInsert=true
 
-gameData.size="m"
+gameData.size="vl"
 
 gameData.collectedWords ={"Am","kl", "kla"}
 gameData.collectedLetters = {"A", "l", "m","k", "a"}
