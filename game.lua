@@ -278,6 +278,7 @@ if (gameData.workingScreen==gameData.banglaSorbornoScreen) then
    --iconImage.y = startY - 10*iconScale
  end
     
+ 
   if (gameData.workingScreen==gameData.englishLetterScreen) then
    print("it is working")
    pictureScale=70

@@ -832,6 +832,7 @@ if (i==rowCount+loop) then
   iconGroups[i].myIndex = i
   iconGroups[i].currentIndex = i
   iconGroups[i].myAudio = gameData.workingScreenNumber[indexRequired].audio
+  iconGroups[i].text = iconText.text
 
   iconGroups[i].tablePos = indexRequired
  
