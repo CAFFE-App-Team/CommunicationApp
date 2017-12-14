@@ -1,11 +1,16 @@
 local ImageSize = require "imagesizelua"
-
+local usageData = require "usageData"
 local  barScene = {}
 local widget = require( "widget" )
 local gameData = require( "gameData" )
+local loadsave = require( "loadsave" ) 
 
+--[[ barScrollView = widget.newScrollView(
+    {
+ 
+    }
+)--]]
 
-local scrollView
 
 local topIcons = {}
  local topPos = {60, 160, 260, 360}
@@ -45,9 +50,10 @@ local englishFolder=""
 
 
 
-    local topBar = display.newImageRect ("topBarStrip.png", 2,65)
+   topBar = display.newImageRect ("topBarStrip.png", 2,65)
     topBar.x = display.contentWidth-70
     topBar.y = 65
+
 
     local bottomBar = display.newImageRect ("bottomStrip.png", 1.5,180)
     bottomBar.x = display.contentWidth-70
@@ -67,7 +73,7 @@ if(event.phase == "began" and noDelete==false) then
 
 if (topIconIndex>3) then
 
-    scrollView:scrollToPosition
+    barScrollView:scrollToPosition
 {
     x = startScroll - ((topIconIndex-4)*85),
 
@@ -114,7 +120,7 @@ local function scrollListener( event )
     return true
 end
 
- scrollView = widget.newScrollView(
+ barScrollView = widget.newScrollView(
     {
         top = 25,
         left = 0,
@@ -131,7 +137,7 @@ end
 
 --myScene:insert(scrollView)
 
-    scrollView:scrollToPosition
+    barScrollView:scrollToPosition
 {
     x = startScroll,
 
@@ -488,7 +494,7 @@ local hundredFlag=false
    end  
 
    if (scrollPlace>4) then
-    scrollView:scrollToPosition
+    barScrollView:scrollToPosition
 {
     x = startScroll - ((scrollPlace-3)*85),
 
@@ -514,7 +520,7 @@ function playSentenceTouch(event)
  if(event.phase == "began" and canPlaySentence) then
 
 
-            scrollView:scrollToPosition
+            barScrollView:scrollToPosition
 {
     x = startScroll,
 
@@ -617,7 +623,7 @@ end
 
 if (pos>4) then
 
-    scrollView:scrollToPosition
+    barScrollView:scrollToPosition
 {
     x = startScroll - ((pos-3)*85),
 
@@ -713,7 +719,7 @@ local setX=60
   topIcons[pos].y = 40
 
 
-  scrollView:insert(topIcons[pos])
+  barScrollView:insert(topIcons[pos])
 
 
 
@@ -733,7 +739,36 @@ function buildSentence(event)
 
   if (gameData.canTouch) then
 
---  print ("ind "..event.target.currentIndex)
+ print ("my text "..event.target.text)
+
+ local function tableContains(table, element)
+
+print (#table)
+for i = 1, #table  do
+  print (table[i].text..'  '..element)
+  if table[i].text==element then
+    local count = table[i].count
+    count=count+1
+    table[i].count=count
+    loadsave.saveTable (usageData.sampleData, "sampleData.json" )
+    return true;
+  end
+  end  
+return false;
+end  
+
+
+local hasValue = tableContains(usageData.sampleData, event.target.text);
+
+print ('table has value ')
+  print(hasValue)
+
+if (hasValue==false) then
+
+table.insert( usageData.sampleData,  { text=event.target.text, count=1 }  )
+  loadsave.saveTable (usageData.sampleData, "sampleData.json" )
+end 
+
 
 insertTopImage(event.target)
 
@@ -800,7 +835,7 @@ theScene:insert(topBar)
 theScene:insert(bottomBar)
 theScene:insert(readBtn)
 theScene:insert(deleteBtn)
-theScene:insert(scrollView)
+theScene:insert(barScrollView)
 
 
 
@@ -815,7 +850,7 @@ display.getCurrentStage():insert(topBar)
 display.getCurrentStage():insert(bottomBar)
 display.getCurrentStage():insert(readBtn)
 display.getCurrentStage():insert(deleteBtn)
-display.getCurrentStage():insert( scrollView )
+display.getCurrentStage():insert( barScrollView )
    
 
 end    

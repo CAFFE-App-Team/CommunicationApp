@@ -921,6 +921,7 @@ if (tempImg) then
   iconGroups[i].myIndex = i
   iconGroups[i].currentIndex = i
   iconGroups[i].myAudio = gameData.workingScreen[indexRequired].audio
+  iconGroups[i].text = iconText.text
 
   iconGroups[i].tablePos = indexRequired
  

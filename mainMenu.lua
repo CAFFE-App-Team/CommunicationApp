@@ -2,6 +2,7 @@ local composer = require( "composer" )
 local gameData = require( "gameData" )
 local loadsave = require( "loadsave" )
 local barScene = require "barScene"
+local usageData = require "usageData"
  
 local scene = composer.newScene()
  
@@ -73,6 +74,10 @@ if (gameData.size==nil) then
 
       if (loadsave.loadTable( "homeScreenGridPosition.json" ) ~= nil) then
       gameData.homeScreenGridPosition = loadsave.loadTable( "homeScreenGridPosition.json")
+      end
+
+      if (loadsave.loadTable( "sampleData.json" ) ~= nil) then
+      usageData.sampleData = loadsave.loadTable( "sampleData.json")
       end
    
 
@@ -529,6 +534,36 @@ commonBtn:addEventListener( "touch", loadScreen )
 
 
 
+ local function loadDataScreen( event )
+
+    if ( event.phase == "began" ) then
+
+  if (canTouch) then
+    
+    local options =
+    {
+    effect = "crossFade",
+    time = 400
+
+    }
+    composer.gotoScene( "usageTable", options ) 
+
+  end
+
+  
+  end
+    return true
+ end 
+
+
+local dataBtn = display.newImageRect( "settings.png", 25,25)
+dataBtn.x=30
+dataBtn.y=270
+
+sceneGroup:insert(dataBtn)
+
+dataBtn:addEventListener( "touch", loadDataScreen )
+
 
 
 end
@@ -549,12 +584,18 @@ function scene:show( event )
    composer.removeScene( "game")
    composer.removeScene( "number")
    composer.removeScene("settingsScreen")
+   composer.removeScene( "usageTable")
+
+
 
    if (gameData.firstRun==true) then
     print ('CREATE BAR')
    createBar()
    gameData.firstRun=false
 
+else
+
+  barScrollView.alpha=1
 
 end
     end
