@@ -686,6 +686,11 @@ if (rat>80) then
   iconImage.y=iconImage.y-10  
   local iconText = display.newText( useText, iconImage.x, iconImage.y+35, native.systemFont, 14 )
   iconText:setFillColor( 0, 0, 0 )
+    if (gameData.workingScreen == gameData.englishLetterScreen
+        or gameData.workingScreen == gameData.banglaSorbornoScreen
+        or gameData.workingScreen == gameData.banglaBenjorbornoScreen) then
+    iconText.alpha=0
+  end
 
  
 

@@ -901,6 +901,11 @@ if (tempImg) then
 
   local iconText = display.newText( gameData.workingScreen[indexRequired].text, 100*iconScale, 200*iconScale, native.systemFont, 14*iconScale )
   iconText:setFillColor( 0, 0, 0 )
+    if (gameData.workingScreen == gameData.englishLetterScreen
+        or gameData.workingScreen == gameData.banglaSorbornoScreen
+        or gameData.workingScreen == gameData.banglaBenjorbornoScreen) then
+    iconText.alpha=0
+  end
   local editIndex = #editBtn
   if (editIndex==nil) then
     editIndex=0

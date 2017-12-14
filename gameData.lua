@@ -198,10 +198,12 @@ gameData.emotionScreen = {
 
 }
 
+--need bangla letters in text field
+
 
 gameData.banglaSorbornoScreen = {
-{ text="", audio="a", image="a", ind=1 },
-{ text="", audio="aa", image="aa", ind=2 },
+{ text="অ", audio="a", image="a", ind=1 },
+{ text="আ", audio="aa", image="aa", ind=2 },
 { text="", audio="i", image="i", ind=3 },
 { text="", audio="ee", image="ee", ind=4 },
 { text="", audio="u", image="u", ind=5 },
@@ -217,11 +219,11 @@ gameData.banglaSorbornoScreen = {
 { text="", audio="", image="non", ind=15 },
 { text="", audio="", image="non", ind=16 }
 
-}
+}--need bangla letters in text field
 
 
 gameData.banglaBenjorbornoScreen = {
-{ text="", audio="k", image="k", ind=1 },
+{ text="ক", audio="k", image="k", ind=1 },
 { text="", audio="kh", image="kh", ind=2 },
 { text="", audio="g", image="g", ind=3 },
 { text="", audio="gh", image="gh", ind=4 },
@@ -287,32 +289,32 @@ gameData.colourScreen = {
 
 
 gameData.englishLetterScreen = {
-{ text="", audio="Aaaa", image="Aaaa", ind=1 },
-{ text="", audio="Bb", image="Bb", ind=2 },
-{ text="", audio="Cc", image="Cc", ind=3 },
-{ text="", audio="Dd", image="Dd", ind=4 },
-{ text="", audio="Eeee", image="Eeee", ind=5 },
-{ text="", audio="Ff", image="Ff", ind=6 },
-{ text="", audio="Gg", image="Gg", ind=7 },
-{ text="", audio="Hh", image="Hh", ind=8 },
-{ text="", audio="Ii", image="Ii", ind=9},
-{ text="", audio="Jj", image="Jj", ind=10 },
-{ text="", audio="Kk", image="Kk", ind=11 },
-{ text="", audio="Ll", image="Ll", ind=12 },
-{ text="", audio="Mm", image="Mm", ind=13 },
-{ text="", audio="Nnnnn", image="Nnnnn", ind=14 },
-{ text="", audio="Ooo", image="Ooo", ind=15 },
-{ text="", audio="Pp", image="Pp", ind=16 },
-{ text="", audio="Qq", image="Qq", ind=17 },
-{ text="", audio="Rr", image="Rr", ind=18 },
-{ text="", audio="Ss", image="Ss", ind=19},
-{ text="", audio="Tt", image="Tt", ind=20 },
-{ text="", audio="Uu", image="Uu", ind=21 },
-{ text="", audio="Vv", image="Vv", ind=22 },
-{ text="", audio="Ww", image="Ww", ind=23 },
-{ text="", audio="Xx", image="Xx", ind=24 },
-{ text="", audio="Yy", image="Yy", ind=25 },
-{ text="", audio="Zz", image="Zz", ind=26 },
+{ text="A", audio="Aaaa", image="Aaaa", ind=1 },
+{ text="B", audio="Bb", image="Bb", ind=2 },
+{ text="C", audio="Cc", image="Cc", ind=3 },
+{ text="D", audio="Dd", image="Dd", ind=4 },
+{ text="E", audio="Eeee", image="Eeee", ind=5 },
+{ text="F", audio="Ff", image="Ff", ind=6 },
+{ text="G", audio="Gg", image="Gg", ind=7 },
+{ text="H", audio="Hh", image="Hh", ind=8 },
+{ text="I", audio="Ii", image="Ii", ind=9},
+{ text="J", audio="Jj", image="Jj", ind=10 },
+{ text="K", audio="Kk", image="Kk", ind=11 },
+{ text="L", audio="Ll", image="Ll", ind=12 },
+{ text="M", audio="Mm", image="Mm", ind=13 },
+{ text="N", audio="Nnnnn", image="Nnnnn", ind=14 },
+{ text="O", audio="Ooo", image="Ooo", ind=15 },
+{ text="P", audio="Pp", image="Pp", ind=16 },
+{ text="Q", audio="Qq", image="Qq", ind=17 },
+{ text="R", audio="Rr", image="Rr", ind=18 },
+{ text="S", audio="Ss", image="Ss", ind=19},
+{ text="T", audio="Tt", image="Tt", ind=20 },
+{ text="U", audio="Uu", image="Uu", ind=21 },
+{ text="V", audio="Vv", image="Vv", ind=22 },
+{ text="W", audio="Ww", image="Ww", ind=23 },
+{ text="X", audio="Xx", image="Xx", ind=24 },
+{ text="Y", audio="Yy", image="Yy", ind=25 },
+{ text="Z", audio="Zz", image="Zz", ind=26 },
 { text="", audio="", image="non", ind=27 },
 { text="", audio="", image="non", ind=28 },
 { text="", audio="", image="non", ind=29},
