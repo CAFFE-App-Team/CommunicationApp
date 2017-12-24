@@ -19,6 +19,8 @@ local iconMax=10
 
  local screenGrid={}
 
+ local dataBtnCount=0
+
   local canPressRightArrow=true
   local canPressLeftArrow=true
 
@@ -541,6 +543,10 @@ commonBtn:addEventListener( "touch", loadScreen )
     if ( event.phase == "began" ) then
 
   if (canTouch) then
+
+    dataBtnCount = dataBtnCount + 1
+
+    if (dataBtnCount > 9) then
     
     local options =
     {
@@ -552,15 +558,17 @@ commonBtn:addEventListener( "touch", loadScreen )
 
   end
 
+end
   
   end
     return true
  end 
 
 
-local dataBtn = display.newImageRect( "settings.png", 25,25)
+local dataBtn = display.newImageRect( "dataBtnInvisi.png", 25,25)
 dataBtn.x=30
 dataBtn.y=270
+dataBtn.alpha=0.1
 
 sceneGroup:insert(dataBtn)
 
@@ -598,6 +606,9 @@ function scene:show( event )
 else
 
   barScrollView.alpha=1
+  readBtn.alpha=1
+deleteBtn.alpha=1
+topSquare.alpha=1
 
 end
     end

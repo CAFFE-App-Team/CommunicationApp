@@ -12,6 +12,9 @@ local barScene = require "barScene"
         local sceneGroup = self.view
 
 barScrollView.alpha=0
+readBtn.alpha=0
+deleteBtn.alpha=0
+topSquare.alpha=0
 
 
 

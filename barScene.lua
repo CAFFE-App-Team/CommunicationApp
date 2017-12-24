@@ -29,8 +29,8 @@ local topIcons = {}
 
    local noDelete=false
 
-   local readBtn
-   local deleteBtn
+  -- local readBtn
+   --local deleteBtn
 
    local longNumber
    local hundredNumber
@@ -45,8 +45,8 @@ local englishFolder=""
 
    
 
-    local bg = display.newRect (display.contentWidth-40, 65, 80,80)
-    bg:setFillColor(27/255, 186/255, 161/255)
+     topSquare = display.newRect (display.contentWidth-40, 65, 80,80)
+    topSquare:setFillColor(27/255, 186/255, 161/255)
 
 
 
@@ -679,7 +679,7 @@ if (rat>80) then
 
   local iconImage = display.newImageRect( "pecs/"..useImage..".png", ratio*default,default)
   
-  print ('my ratio '..useImage..' '..rat)
+  --print ('my ratio '..useImage..' '..rat)
   if (iconImage==nil) then
     iconImage = display.newImageRect(useImage,system.DocumentsDirectory,45,45)
   end
@@ -744,13 +744,13 @@ function buildSentence(event)
 
   if (gameData.canTouch) then
 
- print ("my text "..event.target.text)
+ --print ("my text "..event.target.text)
 
  local function tableContains(table, element)
 
-print (#table)
+--print (#table)
 for i = 1, #table  do
-  print (table[i].text..'  '..element)
+  --print (table[i].text..'  '..element)
   if table[i].text==element then
     local count = table[i].count
     count=count+1
@@ -765,8 +765,8 @@ end
 
 local hasValue = tableContains(usageData.sampleData, event.target.text);
 
-print ('table has value ')
-  print(hasValue)
+--print ('table has value ')
+ -- print(hasValue)
 
 if (hasValue==false) then
 
@@ -834,8 +834,7 @@ print ("in scene")
 print (theScene)
 
 gameData.toInsert=false
-print (bg)
-theScene:insert(bg)
+theScene:insert(topSquare)
 theScene:insert(topBar)
 theScene:insert(bottomBar)
 theScene:insert(readBtn)
@@ -850,7 +849,7 @@ else
     print ("on stage")
 
 gameData.toInsert=true
-display.getCurrentStage():insert(bg)
+display.getCurrentStage():insert(topSquare)
 display.getCurrentStage():insert(topBar)
 display.getCurrentStage():insert(bottomBar)
 display.getCurrentStage():insert(readBtn)
