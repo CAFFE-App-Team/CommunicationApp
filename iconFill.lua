@@ -222,12 +222,14 @@ local function textListener( event )
     if ( event.phase == "began" ) then
         -- User begins editing "defaultField"
         alreadySubmitted=false
- 
+      
     elseif ( event.phase == "ended" or  event.phase == "submitted" ) then
         -- Output resulting text from "defaultField"
         print( event.target.text )
+
         print ("submitted")
         alreadySubmitted=true
+
         submitValue()
  
     elseif ( event.phase == "editing" ) then
@@ -285,6 +287,11 @@ end
 
 local function openInputField( event )
 
+    if (labelInput.text=="text") then
+
+       labelInput.text=""
+
+   end
 
     function submitValue()
 
@@ -296,6 +303,7 @@ local function openInputField( event )
 
         if (defaultField.text==nil) then
         enteredText = ""
+     
         else
         enteredText = defaultField.text
         end    
@@ -303,12 +311,16 @@ local function openInputField( event )
         else
         enteredText = ""
 
+
         end
 
       gameData.workingScreen[gameData.indexEdit].text=enteredText
 
         labelBox = display.newRect( scrollView, 220+side, 30, 100, 20 )
         scrollView:insert( labelBox )
+        if (defaultField.text=="") then
+            defaultField.text="text"
+        end    
         labelInput = display.newText(  defaultField.text, labelBox.x, labelBox.y, native.systemFont, 16 ) 
         labelInput:setFillColor( 0,0,0 )
         scrollView:insert(labelInput)
@@ -398,13 +410,13 @@ iMayPlay=false
         local soundName = gameData.workingScreen[gameData.indexEdit].audio
 
         local soundToPlay = nil
-           soundToPlay = audio.loadSound( "voice/"..soundName..".mp3", {channel=2} )
+           soundToPlay = audio.loadSound( "voice/"..soundName..".mp3")
 
           if (soundToPlay==nil)then
                soundToPlay = audio.loadSound( "sounds/"..soundName..".wav", system.DocumentsDirectory )
           end  
 
-          local playMe = audio.play( soundToPlay, { onComplete=onCompleteSound } )
+          local playMe = audio.play( soundToPlay, { onComplete=onCompleteSound, channel=2 } )
 
   --  end
 
@@ -493,9 +505,10 @@ end
 
 end
 
-end
 
 return true
+
+end
 
 end 
 

@@ -273,7 +273,7 @@ scrollPlace = wordCount
          end
 
         local soundToPlay = nil
-           soundToPlay = audio.loadSound( "voice/"..englishFolder..double..".mp3", {channel=2} )
+           soundToPlay = audio.loadSound( "voice/"..englishFolder..double..".mp3" )
 
           if (soundToPlay==nil)then
                soundToPlay = audio.loadSound( "sounds/"..double..".wav", system.DocumentsDirectory )
@@ -281,7 +281,7 @@ scrollPlace = wordCount
 
  
 
-         local playMe = audio.play( soundToPlay, {onComplete=wordFinishedHundred } )
+         local playMe = audio.play( soundToPlay, {onComplete=wordFinishedHundred, channel=2 } )
 
        else
 
@@ -410,7 +410,7 @@ local hundredFlag=false
          end
 
         local soundToPlay = nil
-           soundToPlay = audio.loadSound( "voice/"..englishFolder..hundred..".mp3", {channel=2} )
+           soundToPlay = audio.loadSound( "voice/"..englishFolder..hundred..".mp3" )
 
           if (soundToPlay==nil)then
                soundToPlay = audio.loadSound( "sounds/"..hundred..".wav", system.DocumentsDirectory )
@@ -418,14 +418,14 @@ local hundredFlag=false
 
 
 
-         local playMe = audio.play( soundToPlay, {onComplete=readDouble } )
+         local playMe = audio.play( soundToPlay, {onComplete=readDouble, channel=2 } )
 
        else
 
            midReading=true
 
         local soundToPlay = nil
-           soundToPlay = audio.loadSound( "voice/"..englishFolder..double..".mp3", {channel=2} )
+           soundToPlay = audio.loadSound( "voice/"..englishFolder..double..".mp3" )
 
           if (soundToPlay==nil)then
                soundToPlay = audio.loadSound( "sounds/"..double..".wav", system.DocumentsDirectory )
@@ -433,7 +433,7 @@ local hundredFlag=false
 
 
 
-         local playMe = audio.play( soundToPlay, {onComplete=wordFinishedHundred } )
+         local playMe = audio.play( soundToPlay, {onComplete=wordFinishedHundred, channel=2 } )
 
        end
 
@@ -455,7 +455,7 @@ local hundredFlag=false
          end
 
         local soundToPlay = nil
-           soundToPlay = audio.loadSound( "voice/"..englishFolder..double..".mp3", {channel=2} )
+           soundToPlay = audio.loadSound( "voice/"..englishFolder..double..".mp3" )
 
           if (soundToPlay==nil)then
                soundToPlay = audio.loadSound( "sounds/"..double..".wav", system.DocumentsDirectory )
@@ -464,7 +464,7 @@ local hundredFlag=false
 
 
 
-         local playMe = audio.play( soundToPlay, {onComplete=wordFinishedDouble } )
+         local playMe = audio.play( soundToPlay, {onComplete=wordFinishedDouble, channel=2 } )
 
   end  
 
@@ -481,7 +481,7 @@ local hundredFlag=false
          end
 
         local soundToPlay = nil
-           soundToPlay = audio.loadSound( "voice/"..englishFolder..sentenceBuilder[wordCount]..".mp3", {channel=2} )
+           soundToPlay = audio.loadSound( "voice/"..englishFolder..sentenceBuilder[wordCount]..".mp3" )
 
           if (soundToPlay==nil)then
                soundToPlay = audio.loadSound( "sounds/"..sentenceBuilder[wordCount]..".wav", system.DocumentsDirectory )
@@ -489,7 +489,7 @@ local hundredFlag=false
 
  
 
-         local playMe = audio.play( soundToPlay, {onComplete=wordFinished } )
+         local playMe = audio.play( soundToPlay, {onComplete=wordFinished, channel=2 } )
 
    end  
 
@@ -590,13 +590,13 @@ if(event.phase == "began" and midReading==false) then
            local soundName = event.target.myAudio
 
         local soundToPlay = nil
-           soundToPlay = audio.loadSound( "voice/"..englishFolder..soundName..".mp3", {channel=2} )
+           soundToPlay = audio.loadSound( "voice/"..englishFolder..soundName..".mp3" )
 
           if (soundToPlay==nil)then
                soundToPlay = audio.loadSound( "sounds/"..soundName..".wav", system.DocumentsDirectory )
           end 
  
-            local playMe = audio.play( soundToPlay, {onComplete=wordFinished } )
+            local playMe = audio.play( soundToPlay, {onComplete=wordFinished, channel=2 } )
 
   end
   return true          
@@ -784,13 +784,14 @@ insertTopImage(event.target)
            local soundName = event.target.myAudio
 
         local soundToPlay = nil
-           soundToPlay = audio.loadSound( "voice/"..englishFolder..soundName..".mp3", {channel=2} )
+           soundToPlay = audio.loadSound( "voice/"..englishFolder..soundName..".mp3" )
 
           if (soundToPlay==nil)then
-               soundToPlay = audio.loadSound( "sounds/"..soundName..".wav", system.DocumentsDirectory )
+
+               soundToPlay = audio.loadSound( "sounds/"..soundName..".wav", system.DocumentsDirectory  )
           end 
    
-            local playMe = audio.play( soundToPlay )
+            local playMe = audio.play( soundToPlay, {channel=2} )
 
             --limit to 9 words
 

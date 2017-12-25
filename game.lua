@@ -1162,6 +1162,7 @@ end
 
 local function enterEditMode( )
 
+
     if (loadsave.loadTable( gameData.saveFile..".json"  ) ~= nil) then
       gameData.workingScreen = loadsave.loadTable( gameData.saveFile..".json"  )
     end
@@ -1169,14 +1170,7 @@ local function enterEditMode( )
 if (inEditMode==false) then
 
   inEditMode=true
---print  ("tix ed "..topIconIndex)
 
---remove any icons from top row 
-
-
-
-
----
 
 for c=1, #collRect do
 
@@ -1303,8 +1297,21 @@ end
 
   end 
 
-end  
+end 
+
 end
+
+    local function enterEditModeTrigger( event )
+        local phase = event.phase
+        if "ended" == phase then
+
+          enterEditMode()
+
+        end
+    
+    return true
+
+    end      
 
 local pressTimer
 local pressRuntimer
@@ -1324,19 +1331,23 @@ end
     
     local function handleButtonEvent( event )
         local phase = event.phase
+        local pressRuntimer = nil
         if "began" == phase then
-             pressTimer = os.time()
+             --pressTimer = os.time()
              canFire=true
-             pressRuntimer = timer.performWithDelay(1, longPressUpdate, -1)
+             pressRuntimer = timer.performWithDelay(2500, enterEditMode)
         elseif "ended" == phase then
-             local timeHeld = os.time() - pressTimer
-             if timeHeld >= 2 then
-                timer.cancel(pressRuntimer)
-             else
+
+            -- local timeHeld = os.time() - pressTimer
+            -- if timeHeld >= 2 then
+              --  timer.cancel(pressRuntimer)
+            -- else
                   print("Held short, do something")
+                  if (pressRuntimer ~= nil) then
                   timer.cancel(pressRuntimer)
+                end
              end
-        end
+        
     end
 
 local editBtn = display.newImageRect("editBtn.png", 25,25)
