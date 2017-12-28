@@ -508,6 +508,62 @@ return true
 
 end 
 
+local function openGalleryPicker(event)
+
+        if ( event.phase == "began" ) then
+
+local function onComplete( event )
+   if ( event.completed ) then
+
+
+    table.insert( gameData.customImages, 1, imageCounter..".jpg" )
+loadsave.saveTable (gameData.customImages, "customImageList.json" )
+
+for i=1, #imageBoxes do
+
+        imageBoxes[i]:removeSelf()
+        imageBoxes[i] = nil
+
+end   
+
+
+
+displayMyImages()
+
+   end
+end
+
+   if (#myFiles>0) then
+
+        imageCounter = imageCount()
+
+end
+
+        local options =
+    {
+       mediaSource=media.PhotoLibrary, 
+    listener = onComplete, 
+    destination = {
+
+
+            baseDir = system.DocumentsDirectory,
+      filename = "images/"..imageCounter..".jpg",
+      type = "image"}
+
+    }
+
+ 
+    if media.hasSource ( media.PhotoLibrary ) then
+       media.selectPhoto ( options )
+    else
+       native.showAlert( "Corona", "This device does not have a photo library.", { "OK" } )
+    end
+
+end
+return true
+
+end    
+
 
 
 function displayMyImages()
@@ -522,6 +578,14 @@ scrollView:insert(camBox)
 camBox.x=startX
 camBox.y=startY
 camBox:addEventListener("touch", takePic)
+
+startX=startX+70
+
+ local galleryBox =  display.newImageRect ("galleryIcon.png", 50,50)
+scrollView:insert(galleryBox)
+galleryBox.x=startX
+galleryBox.y=startY
+galleryBox:addEventListener("touch", openGalleryPicker)
 
 startX=startX+70
 
