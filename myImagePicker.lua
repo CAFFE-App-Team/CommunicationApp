@@ -334,6 +334,9 @@ print ("nsw")
         return true 
     end
 
+
+
+
 noObjects = display.newImageRect("imageInUse.png", 500*1.517, 500)
 noObjects.x = display.contentCenterX
 noObjects.y = display.contentCenterY
