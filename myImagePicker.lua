@@ -544,9 +544,7 @@ end
        mediaSource=media.PhotoLibrary, 
     listener = onComplete, 
     destination = {
-
-
-            baseDir = system.DocumentsDirectory,
+    baseDir = system.DocumentsDirectory,
       filename = "images/"..imageCounter..".jpg",
       type = "image"}
 
