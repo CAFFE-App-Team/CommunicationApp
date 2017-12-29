@@ -2,7 +2,7 @@ local usageData = {}
 
 usageData.sampleData = {
   
- { text="WORD", count=1 }
+ { text="Version", count=3 }
 
 
 

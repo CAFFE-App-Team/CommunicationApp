@@ -113,7 +113,7 @@ end
  end 
 
 
-local dataBtn = display.newImageRect( "settings.png", 25,25)
+local dataBtn = display.newImageRect( "backBtnPopUp.png", 30,30)
 dataBtn.x=30
 dataBtn.y=270
 

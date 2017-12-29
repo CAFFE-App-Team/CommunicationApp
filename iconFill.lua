@@ -170,6 +170,8 @@ print ("nsw")
             okBtn:removeSelf()
             okBtn=nil
 
+            canPress=true
+
         end  
         return true 
     end
@@ -179,6 +181,8 @@ print ("nsw")
         if ( event.phase == "began" ) then
 
             -- just catch the touch
+
+            canPress=true
 
         end  
         return true 
