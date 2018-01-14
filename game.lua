@@ -98,6 +98,8 @@ local quickBtnLink
 
 local quickBtnImage
 
+local shouldStillCheck = true
+
 
  
 -- -----------------------------------------------------------------------------------
@@ -504,6 +506,8 @@ end
 
 local function hasCollidedCards( obj1, obj2, index1, index2)
 
+  if (shouldStillCheck) then
+
 
     if ( obj1 == nil ) then  -- Make sure the first object exists
         return false
@@ -519,12 +523,18 @@ local function hasCollidedCards( obj1, obj2, index1, index2)
     local dy = actualBox1Y - actualBox2Y
  
     local distance = math.sqrt( dx*dx + dy*dy )
-    local objectSize = (obj2.contentWidth/2) + (obj1.contentWidth/2)
+    local objectSize = ((obj2.contentWidth/2)) + ((obj1.contentWidth/2))
  
     if ( distance < objectSize ) then
         return true
     end
     return false
+
+  else
+
+    return false
+
+  end
 end
 
 local function hasCollidedCircle( obj1, obj2, myIndex )
@@ -561,10 +571,11 @@ local noSwap = false
 for collOther = 1, #letterBoxes do
 
 
- if (hasCollidedCards(letterBoxes[boxIndex], letterBoxes[collOther], boxIndex, collOther)) then
-
+ if (shouldStillCheck and hasCollidedCards(letterBoxes[boxIndex], letterBoxes[collOther], boxIndex, collOther)) then
 
 if (movedLetter ~= iconGroups[collOther]) then
+
+shouldStillCheck = false
 
   local firstX = collRect[iconGroups[collOther].currentIndex].x - collRect[movedLetter.myIndex].x 
   local firstY = collRect[iconGroups[collOther].currentIndex].y - collRect[movedLetter.myIndex].y 
@@ -577,10 +588,14 @@ if (movedLetter ~= iconGroups[collOther]) then
   movedLetter.x = firstX
   movedLetter.y = firstY
   movedLetter.currentIndex = firstIndex
+  movedLetter.dockX = movedLetter.x
+  movedLetter.dockY = movedLetter.y
 
   iconGroups[collOther].x = secondX
   iconGroups[collOther].y = secondY
   iconGroups[collOther].currentIndex = secondIndex
+  iconGroups[collOther].dockX = secondX
+  iconGroups[collOther].dockY = secondY
 
 
   gameData.workingScreen[movedLetter.tablePos].ind = movedLetter.currentIndex
@@ -599,7 +614,11 @@ print ("SAVED SAVED")
 
   noSwap = true
 
+
+
 end
+
+
 
  end
 
@@ -658,6 +677,7 @@ end--]]
 
 end
 
+shouldStillCheck = true
 
 end
 
