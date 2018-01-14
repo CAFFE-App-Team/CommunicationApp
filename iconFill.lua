@@ -170,7 +170,11 @@ print ("nsw")
             okBtn:removeSelf()
             okBtn=nil
 
+
+
             canPress=true
+
+                   print (canPress)
 
         end  
         return true 
@@ -455,11 +459,17 @@ end
 
  local function submitValueOther(event)
 
+    print ('sub val other ')
+    print (canPress);
+
+
+    if(event.phase == "began") then
+
     if (canPress) then
 
         canPress=false
 
-    if(event.phase == "began") then
+    
 
     if (alreadySubmitted==false) then
 

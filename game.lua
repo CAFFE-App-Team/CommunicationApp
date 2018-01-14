@@ -608,7 +608,12 @@ end
 
 if (noSwap==false) then
 
-for coll = 1, #gameData.workingScreen do
+movedLetter.x = movedLetter.dockX;
+movedLetter.y = movedLetter.dockY;
+
+end  
+
+--[[for coll = 1, #gameData.workingScreen do
 
  if (hasCollidedCircle(movedLetter, collRect[coll], boxIndex)) then
 
@@ -647,7 +652,7 @@ end
 
 
 
-end
+end--]]
 
 --check coll with other letter first
 
@@ -1212,7 +1217,7 @@ end
   for j=1 , #gameData.workingScreen do
 
     if (iconGroups[j] ~= nil) then
-      iconGroups[j]:removeEventListener("touch", movePlatform)
+     iconGroups[j]:removeEventListener("touch", movePlatform)
 
  
       iconGroups[j]:addEventListener("touch", buildSentence)
