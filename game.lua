@@ -900,7 +900,21 @@ if (tempImg) then
   letterBoxes[i] = display.newImageRect( "blankIcon.png", 80*iconScale, 80*iconScale)
   local iconImage = display.newImageRect( "pecs/"..gameData.workingScreen[indexRequired].image..".png", ratio*(pictureScale*iconScale),pictureScale*iconScale)
   if (iconImage==nil) then
-    iconImage = display.newImageRect(gameData.workingScreen[indexRequired].image,system.DocumentsDirectory,pictureScale*iconScale,pictureScale*iconScale)
+
+
+    local tempImg = display.newImage(gameData.workingScreen[indexRequired].image,system.DocumentsDirectory)
+
+    if (tempImg) then
+
+    ratio = tempImg.width/tempImg.height
+       tempImg:removeSelf()
+        tempImg = nil
+
+
+  end
+
+
+    iconImage = display.newImageRect(gameData.workingScreen[indexRequired].image,system.DocumentsDirectory,ratio*(pictureScale*iconScale),pictureScale*iconScale)
   end 
 
 

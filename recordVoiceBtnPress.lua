@@ -136,12 +136,8 @@ local function updateStatus ( event )
         local fRecording = r:isRecording ()
         if fRecording then 
             recString = "RECORDING" 
-
-
             recButton.isVisible=false
-            recordingMic.isVisible=true
-            recordingMic:play()
-            --stopButton.isVisible=true
+            stopButton.isVisible=true
 
         recordText:removeSelf()
         recordText=nil  
@@ -161,20 +157,13 @@ local function updateStatus ( event )
 
         elseif fSoundPlaying then
 
-                       recButton.isVisible=true
-            --stopButton.isVisible=false
-            recordingMic:pause()
-            recordingMic.isVisible=false
-
 
         elseif fSoundPaused then
             --recString = "Paused"
             --recButton:setLabel( "Resume playback") 
         else
             recButton.isVisible=true
-            --stopButton.isVisible=false
-            recordingMic:pause()
-            recordingMic.isVisible=false
+            stopButton.isVisible=false
 
          if (recordText~=nil) then   
             
@@ -478,13 +467,13 @@ local function recordTimer( )
     canFire=true
     pressRuntimer = timer.performWithDelay(1, longPressUpdate, -1)
 
-end 
+end  
+ 
+local function recButtonPress ( event )
+    if fSoundPlaying == false then
 
-local function  stopRecordingRelease( event )
-
-    if r then
-
-            if r:isRecording() then
+     if r then
+        if r:isRecording() then
             r:stopRecording()
 
             local filePath = system.pathForFile( "/sounds/"..oldFileName, system.DocumentsDirectory )
@@ -499,19 +488,10 @@ local function  stopRecordingRelease( event )
                 
                 playbackSoundHandle = audio.loadStream( "/sounds/"..oldFileName, system.DocumentsDirectory )
                 audio.play( playbackSoundHandle, { onComplete=onCompleteSound } )
-            end 
+            end                
+        else
 
-        end
 
-    end    
-    
-end 
- 
-local function recButtonPress ( event )
-    if fSoundPlaying == false then
-
-     if r then
-               
             local filePath = system.pathForFile( "/sounds/"..oldFileName, system.DocumentsDirectory )
             
             if (r~=nil) then
@@ -527,7 +507,7 @@ local function recButtonPress ( event )
             r:startRecording()
             recordTimer()
         end
-    
+    end
 end
 end
 
@@ -592,9 +572,8 @@ end
 recButton = widget.newButton
 {
     defaultFile = "recordIcon.png",
-    --overFile = "buttonRedOver.png",
+    overFile = "buttonRedOver.png",
     onPress = recButtonPress,
-    onRelease = stopRecordingRelease,
     fontSize = 20,
     emboss = true
 }
@@ -611,40 +590,13 @@ stopButton = widget.newButton
 
 imageGroup:insert( stopButton )
 
-
-local sheetOptions =
-{
-    width = 82,
-    height = 120,
-    numFrames = 6
-}
-
-local micAnim = graphics.newImageSheet( "micSheet.png", sheetOptions )
-
-local sequences_mic = {
-    -- consecutive frames sequence
-    {
-        name = "recording",
-        start = 1,
-        count = 6,
-        time = 800,
-        loopCount = 0,
-        loopDirection = "bounce"
-    }
-}
-
-recordingMic = display.newSprite( micAnim, sequences_mic )
-imageGroup:insert(recordingMic)
 -----------------------------------------------
 -- *** Locate the buttons on the screen ***
 -----------------------------------------------
 recButton.x = centerX;         recButton.y = 200
 stopButton.x = centerX;         stopButton.y = 200
-recordingMic.x = centerX;       recordingMic.y=200
 
 stopButton.isVisible=false
-recordingMic.isVisible=false
-
 
 
 local function noRecordNameWarn()

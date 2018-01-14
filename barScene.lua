@@ -681,7 +681,19 @@ if (rat>80) then
   
   --print ('my ratio '..useImage..' '..rat)
   if (iconImage==nil) then
-    iconImage = display.newImageRect(useImage,system.DocumentsDirectory,45,45)
+
+      local tempImg = display.newImage(useImage,system.DocumentsDirectory,system.DocumentsDirectory)
+
+    if (tempImg) then
+
+    ratio = tempImg.width/tempImg.height
+       tempImg:removeSelf()
+        tempImg = nil
+
+
+  end
+
+    iconImage = display.newImageRect(useImage,system.DocumentsDirectory,ratio*default,default)
   end
   iconImage.y=iconImage.y-10  
   local iconText = display.newText( useText, iconImage.x, iconImage.y+35, native.systemFont, 14 )
