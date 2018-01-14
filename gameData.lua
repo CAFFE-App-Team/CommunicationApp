@@ -7,6 +7,7 @@ gameData.firstRun=true
 gameData.toInsert=true
 
 gameData.size="vl"
+gameData.classMode = false
 
 gameData.collectedWords ={"Am","kl", "kla"}
 gameData.collectedLetters = {"A", "l", "m","k", "a"}

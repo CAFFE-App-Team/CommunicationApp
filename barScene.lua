@@ -178,6 +178,8 @@ local function  playSentence( wordStart )
 
 local scrollPlace
 
+print( "start playSentence")
+
 
 if (gameData.screenIndex==3) then
 
@@ -517,7 +519,11 @@ end
  
 function playSentenceTouch(event)
 
- if(event.phase == "began" and canPlaySentence) then
+  print (canPlaySentence)
+
+ if(event.phase == "began") then
+
+  if (canPlaySentence) then
 
 
             barScrollView:scrollToPosition
@@ -533,7 +539,7 @@ function playSentenceTouch(event)
 
   playSentence(1)
 
-
+end
 
  end
 
@@ -789,11 +795,15 @@ end
 
 insertTopImage(event.target)
 
+ local soundName = event.target.myAudio
+
+    if (gameData.classMode==false) then
+
        if (audio.isChannelPlaying(2)) then
            audio.stop(2)
          end
 
-           local soundName = event.target.myAudio
+          
 
         local soundToPlay = nil
            soundToPlay = audio.loadSound( "voice/"..englishFolder..soundName..".mp3" )
@@ -806,7 +816,7 @@ insertTopImage(event.target)
             local playMe = audio.play( soundToPlay, {channel=2} )
 
             --limit to 9 words
-
+    end
              
 
           if (#sentenceBuilder<9) then

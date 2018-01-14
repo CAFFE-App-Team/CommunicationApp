@@ -47,6 +47,7 @@ function scene:create( event )
 gameData.isNumberScreen=false
 gameData.workingScreen=nil
 
+gameData.classMode = loadsave.loadTable( "classMode.json")
 
 gameData.size = loadsave.loadTable( "gridSize.json")
 

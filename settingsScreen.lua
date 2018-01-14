@@ -62,6 +62,30 @@ return true
 
 end
 
+local function toggleClass( event )
+ 
+      if ( event.phase == "began" ) then
+
+        if (event.target.state) then
+
+            toggleOff.isVisible=true
+            toggleOn.isVisible=false
+            gameData.classMode = false
+
+        else
+            toggleOff.isVisible=false
+            toggleOn.isVisible=true
+            gameData.classMode = true
+
+        end
+
+        loadsave.saveTable (gameData.classMode, "classMode.json" )
+
+
+        end
+
+end        
+
 
 settingsBg = display.newImageRect("settingsBg.png", 370, 200)
 settingsBg.x = display.contentCenterX-35
@@ -118,6 +142,35 @@ iconBtn4.alpha=0.5
 end
 sceneGroup:insert(iconBtn4)
 
+toggleOff = display.newImageRect("toggleOff.png",56,29)
+toggleOff.state=false
+toggleOff.x = 330
+toggleOff.y = 105
+
+toggleOn = display.newImageRect("toggleOn.png",56,29)
+toggleOn.state=true
+toggleOn.x = 330
+toggleOn.y = 105
+
+toggleOff:addEventListener( "touch", toggleClass )
+toggleOn:addEventListener( "touch", toggleClass )
+
+if (gameData.classMode) then
+
+toggleOff.isVisible=false;
+
+    else
+toggleOn.isVisible=false;
+
+end        
+
+sceneGroup:insert(toggleOff)
+sceneGroup:insert(toggleOn)
+
+classtext = display.newText(  "class", 330, 80, native.systemFont, 14 ) 
+classtext:setFillColor(0,0,0)
+
+sceneGroup:insert(classtext)
 
 okBtn = display.newImageRect("okTextBtn.png", 35*2.58,35)
 okBtn.name = "ok"
