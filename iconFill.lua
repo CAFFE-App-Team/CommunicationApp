@@ -2,6 +2,12 @@ local composer = require( "composer" )
 local gameData = require( "gameData" )
 local widget = require( "widget" )
 local loadsave = require( "loadsave" )
+local gameData = require( "gameData" )
+local timeData = require( "timeData" )
+local cardData = require ("cardData")
+local App42API = require("App42-Lua-API.App42API")
+local JSON = require("App42-Lua-API.JSON")
+local coronaJson = require( "json" )
  
 local scene = composer.newScene()
  
@@ -30,6 +36,8 @@ local scene = composer.newScene()
  local side = -20
 
  local canPress=true
+
+ local uploadWait
  
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
@@ -145,13 +153,23 @@ local function cancelClose(  )
 
 print ("cancel")
 
+gameData.workingScreen[gameData.indexEdit].image=gameData.lastImage
+gameData.workingScreen[gameData.indexEdit].audio=gameData.lastAudio
+gameData.workingScreen[gameData.indexEdit].text=gameData.lastText
+
 gameData.enterEditMode=false
+
+
 
 composer.hideOverlay( "fade", 400 )
 
-parent:resetTopBar()
+parent:updateBoxes()
+
+--parent:resetTopBar()
 
 scene:addEventListener( "hide", scene )
+
+
 
 --end
 
@@ -217,17 +235,59 @@ local function closeEditView(  )
  
   --if ( event.phase == "began" ) then
 
-print ("go")
+
+
 
 if (gameData.workingScreen[gameData.indexEdit].image == "non" or gameData.workingScreen[gameData.indexEdit].audio == "") then
+
+uploadWait:removeSelf()
 
 noSoundImageWarn()
     else
 
+print ("show now")
+
+
 --loadsave.saveTable (gameData.workingScreen, gameData.saveFile..".json" )
 SaveToTable()
 
-gameData.enterEditMode=false
+            local jCopy = coronaJson.encode(gameData.topics)
+
+            cardData.topics = coronaJson.decode(jCopy)
+
+
+for i=1, #cardData.topics do
+
+    local newData = {}
+    newData.text = gameData.mainMenuItems[i]
+
+    table.insert( cardData.topics[i], 1, newData )
+
+end    
+
+
+
+
+local dbName  = "WORDFREQUENCY"
+local collectionName = "wordStats"
+local key = "studentName"
+local value = gameData.studentName
+print ("value is "..gameData.studentName)
+local jsonTable = {}
+jsonTable = JSON:encode(cardData)
+local App42CallBack = {}
+App42API:initialize("e1ab95c1cd21bd9d5e45fda6ac6fac73a233425f14d7c32beee1671a13a18174","dab972571a4b1f0c02fb34620ebfecc232a29fef2ccedac52c1e1d269d2a223c")
+local storageService = App42API:buildStorageService()
+storageService:updateDocumentByKeyValue(dbName,collectionName,key,value,jsonTable,App42CallBack)
+function App42CallBack:onSuccess(object)
+    print ("UPDATED")
+    print("dbName is "..object:getDbName())
+        for i=1,table.getn(object:getJsonDocList()) do
+            print("DocId is "..object:getJsonDocList()[i]:getDocId())
+            print("CreatedAt is "..object:getJsonDocList()[i]:getCreatedAt())
+        end
+        loadsave.saveTable (cardData.topics, "cardDataTopics.json" )
+        gameData.enterEditMode=false
 
 composer.hideOverlay( "fade", 400 )
 
@@ -235,6 +295,24 @@ parent:updateBoxes()
 
 
 scene:addEventListener( "hide", scene )
+end
+function App42CallBack:onException(exception)
+    print("Message is : "..exception:getMessage())
+    print("App Error code is : "..exception:getAppErrorCode())
+    print("Http Error code is "..exception:getHttpErrorCode())
+    print("Detail is : "..exception:getDetails())
+
+
+end
+
+--[[gameData.enterEditMode=false
+
+composer.hideOverlay( "fade", 400 )
+
+parent:updateBoxes()
+
+
+scene:addEventListener( "hide", scene )--]]
 
 --end
 
@@ -515,7 +593,11 @@ end
                    end
 
     if (event.target.id=="done") then
-        closeEditView()
+uploadWait  = display.newImageRect("uploadingWait.png", 200, 101)
+uploadWait.x = display.contentCenterX
+uploadWait.y = display.contentCenterY
+sceneGroup:insert (uploadWait)
+       timer.performWithDelay( 500, closeEditView )
     end
 
     if (event.target.id=="image") then

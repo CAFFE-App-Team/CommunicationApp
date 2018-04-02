@@ -154,6 +154,10 @@ local function  setSound( event)
 
      gameData.workingScreen[gameData.indexEdit].audio=event.target.soundName
 
+     --experiment
+
+     gameData.workingScreen[gameData.indexEdit].src="local"
+
 
 
        print ("go "..gameData.workingScreen[gameData.indexEdit].audio)
@@ -220,7 +224,7 @@ checkMarks[i]:addEventListener("touch", setSound)
 local soundLabel = display.newText(  gameData.defaultSoundsBangla[i], imageBoxes[i].x, imageBoxes[i].y+40, native.systemFont, 16 )  
 scrollView:insert(soundLabel)
 
-print ("my index for bangla sound text is "..i)
+--print ("my index for bangla sound text is "..i)
 
 startX=startX+70
 

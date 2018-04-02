@@ -24,6 +24,8 @@ local topIcons = {}
  local noDelete=false
 
   local sentenceBuilder = {}
+   local banglaSentenceBuilder = {}
+  local audioSrc = {}
 
   local canPlaySentence=true
 
@@ -88,6 +90,8 @@ end
 
 
       table.remove( sentenceBuilder, topIconIndex )
+      table.remove( banglaSentenceBuilder, topIconIndex )
+      table.remove (audioSrc, topIconIndex)
 
     end
 
@@ -174,14 +178,65 @@ deleteBtn:addEventListener("touch", deleteWord)
 
 end
 
+
+local function insertSentenceData(mySentence)
+
+
+ local function tableContains(table, element)
+
+--print (#table)
+for i = 1, #table  do
+  --print (table[i].text..'  '..element)
+  if table[i].text==element then
+    local count = table[i].count
+    count=count+1
+    table[i].count=count
+    loadsave.saveTable (usageData.sentences, "sentenceData.json" )
+    return true;
+  end
+  end  
+return false;
+end  
+
+
+local hasValue = tableContains(usageData.sentences, mySentence);
+
+--print ('table has value ')
+ -- print(hasValue)
+
+if (hasValue==false) then
+
+table.insert( usageData.sentences,  { text=mySentence, count=1 }  )
+  loadsave.saveTable (usageData.sentences, "sentenceData.json" )
+end 
+
+
+end  
+
+
 local function  playSentence( wordStart )
 
 local scrollPlace
 
-print( "start playSentence")
+print( "start playSentence ".. wordStart)
 
+if (wordStart==1) then
 
-if (gameData.screenIndex==3) then
+    local fullSentence=""
+
+    for s=1, #sentenceBuilder do
+
+      fullSentence = fullSentence.." "..banglaSentenceBuilder[s]
+
+    end  
+
+    print ("full sentence is "..fullSentence)
+
+    insertSentenceData(fullSentence)
+
+end
+
+if (gameData.selectedCardIndex==3) then
 
   englishFolder="english/"
 
@@ -552,7 +607,7 @@ local function playTopIcon( event )
 
 local icon = event.target
 
-if (gameData.screenIndex==3) then
+if (gameData.selectedCardIndex==3) then
 
   englishFolder="english/"
 
@@ -594,13 +649,27 @@ if(event.phase == "began" and midReading==false) then
           child.isVisible=true
 
            local soundName = event.target.myAudio
+           local src = event.target.src
 
-        local soundToPlay = nil
+          local soundToPlay = nil
+
+          if (src=="local") then
+
+            soundToPlay = audio.loadSound( "voice/"..englishFolder..soundName..".mp3" )
+
+          else
+             soundToPlay = audio.loadSound( "sounds/"..soundName..".wav", system.DocumentsDirectory  )
+
+          end
+
+
+
+--[[        local soundToPlay = nil
            soundToPlay = audio.loadSound( "voice/"..englishFolder..soundName..".mp3" )
 
           if (soundToPlay==nil)then
                soundToPlay = audio.loadSound( "sounds/"..soundName..".wav", system.DocumentsDirectory )
-          end 
+          end --]]
  
             local playMe = audio.play( soundToPlay, {onComplete=wordFinished, channel=2 } )
 
@@ -611,7 +680,7 @@ end
 
 local function insertTopImage (mainIcon)
 
-  if (gameData.screenIndex==3) then
+  if (gameData.selectedCardIndex==3) then
 
   englishFolder="english/"
 
@@ -796,6 +865,7 @@ end
 insertTopImage(event.target)
 
  local soundName = event.target.myAudio
+ local src = event.target.src
 
     if (gameData.classMode==false) then
 
@@ -803,15 +873,24 @@ insertTopImage(event.target)
            audio.stop(2)
          end
 
-          
+          local soundToPlay = nil
 
-        local soundToPlay = nil
+--[[          if (src=="local") then
+
+            soundToPlay = audio.loadSound( "voice/"..englishFolder..soundName..".mp3" )
+
+          else
+             soundToPlay = audio.loadSound( "sounds/"..soundName..".wav", system.DocumentsDirectory  )
+
+          end--]]
+
+      local soundToPlay = nil
            soundToPlay = audio.loadSound( "voice/"..englishFolder..soundName..".mp3" )
 
           if (soundToPlay==nil)then
 
                soundToPlay = audio.loadSound( "sounds/"..soundName..".wav", system.DocumentsDirectory  )
-          end 
+          end
    
             local playMe = audio.play( soundToPlay, {channel=2} )
 
@@ -823,6 +902,8 @@ insertTopImage(event.target)
 
 
             table.insert (sentenceBuilder, soundName)
+            table.insert (banglaSentenceBuilder, event.target.text)
+            table.insert (audioSrc, event.target.src)
    
 
           end

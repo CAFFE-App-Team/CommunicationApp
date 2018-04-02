@@ -101,7 +101,7 @@ local quickBtnImage
 local shouldStillCheck = true
 
 
- 
+
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
@@ -265,35 +265,37 @@ end
 
 
 
-    gameData.workingScreen=gameData.screenList[gameData.screenIndex].screen
+    gameData.workingScreen= gameData.topics[gameData.selectedCardIndex]
+
+    --gameData.screenList[gameData.screenIndex].screen
 
 
-if (gameData.workingScreen==gameData.banglaSorbornoScreen) then
+if (gameData.selectedCardIndex==4) then
    print("it is working")
    pictureScale=70
    --iconImage.y = startY - 10*iconScale
  end
 
- if (gameData.workingScreen==gameData.banglaBenjorbornoScreen) then
+ if (gameData.selectedCardIndex==5) then
    print("it is working")
    pictureScale=70
    --iconImage.y = startY - 10*iconScale
  end
     
  
-  if (gameData.workingScreen==gameData.englishLetterScreen) then
+  if (gameData.selectedCardIndex==6) then
    print("it is working")
    pictureScale=70
    --iconImage.y = startY - 10*iconScale
  end  
 
- if (gameData.workingScreen==gameData.storyScreen) then
+ if (gameData.selectedCardIndex==13) then
    print("it is working")
    pictureScale=55
    --iconImage.y = startY - 10*iconScale
  end  
 
-   if (gameData.workingScreen==gameData.commonScreen) then
+   if (gameData.selectedCardIndex==1) then
    print("it is common")
    quickBtnLink=gameData.lastScreenIndex
    quickBtnImage = "returnArrow.png"
@@ -304,7 +306,7 @@ if (gameData.workingScreen==gameData.banglaSorbornoScreen) then
 
  end  
 
- gameData.lastScreenIndex = gameData.screenIndex
+ gameData.lastScreenIndex = gameData.selectedCardIndex
 
 
 for icon = 1, #gameData.workingScreen do
@@ -371,7 +373,7 @@ end
         end
 
 
-      gameData.screenGridPositions[gameData.screenIndex] = gridDisplayed
+      gameData.screenGridPositions[gameData.selectedCardIndex] = gridDisplayed
       loadsave.saveTable (gameData.screenGridPositions, "screenGridPositions.json" )
 
       gameData.canTouch=true
@@ -420,7 +422,7 @@ end
 
         end
 
-      gameData.screenGridPositions[gameData.screenIndex] = gridDisplayed
+      gameData.screenGridPositions[gameData.selectedCardIndex] = gridDisplayed
       loadsave.saveTable (gameData.screenGridPositions, "screenGridPositions.json" )
 
       gameData.canTouch=true
@@ -710,6 +712,10 @@ end
 
       --print(gameData.indexEdit)
 
+      gameData.lastText = gameData.workingScreen[gameData.indexEdit].text
+      gameData.lastImage = gameData.workingScreen[gameData.indexEdit].image
+      gameData.lastAudio = gameData.workingScreen[gameData.indexEdit].audio
+
 
       insertToScene(sceneGroup)
 
@@ -877,9 +883,28 @@ end
 
 end
 
+--new content to check if image missing - if it is then make blank card
  
+ local testImg = display.newImage("pecs/"..gameData.workingScreen[indexRequired].image..".png")
 
+if (testImg==nil) then
+ testImg = display.newImage(gameData.workingScreen[indexRequired].image,system.DocumentsDirectory) 
+end
 
+if (testImg==nil) then
+
+  gameData.workingScreen[indexRequired].image = "non"
+  gameData.workingScreen[indexRequired].text = ""
+  gameData.workingScreen[indexRequired].audio = ""
+
+else
+
+  testImg:removeSelf()
+testImg=nil
+
+end 
+
+-- end of missing image check
 
  if (skip==true) then
 if (rowCount>3 and i==rowCount+loop) then
@@ -891,14 +916,12 @@ if (rowCount>3 and i==rowCount+loop) then
   end
  end
 
+
+ 
+
  if (skip==false) then
 
-  --print (gameData.workingScreen[indexRequired].ind.."  ".. gameData.workingScreen[indexRequired].text)
 
---local width, height, format = ImageSize.imgsize("pecs/"..gameData.workingScreen[indexRequired].image..".png")
-
-
---local ratio = width/height
 
 local ratio = 1
 
@@ -914,10 +937,8 @@ if (tempImg) then
   end
 
 
-
-
-
   letterBoxes[i] = display.newImageRect( "blankIcon.png", 80*iconScale, 80*iconScale)
+
   local iconImage = display.newImageRect( "pecs/"..gameData.workingScreen[indexRequired].image..".png", ratio*(pictureScale*iconScale),pictureScale*iconScale)
   if (iconImage==nil) then
 
@@ -930,12 +951,11 @@ if (tempImg) then
        tempImg:removeSelf()
         tempImg = nil
 
-
   end
-
 
     iconImage = display.newImageRect(gameData.workingScreen[indexRequired].image,system.DocumentsDirectory,ratio*(pictureScale*iconScale),pictureScale*iconScale)
   end 
+
 
 
   local iconText = display.newText( gameData.workingScreen[indexRequired].text, 100*iconScale, 200*iconScale, native.systemFont, 14*iconScale )
@@ -966,6 +986,11 @@ if (tempImg) then
   iconGroups[i].myIndex = i
   iconGroups[i].currentIndex = i
   iconGroups[i].myAudio = gameData.workingScreen[indexRequired].audio
+  if (gameData.workingScreen[indexRequired].src) then
+  iconGroups[i].src = gameData.workingScreen[indexRequired].src
+else
+iconGroups[i].src = "local"
+end
   iconGroups[i].text = iconText.text
 
   iconGroups[i].tablePos = indexRequired
@@ -1029,9 +1054,7 @@ end
    iconImage.y = startY - 1*iconScale
  end
 
-   -- if (gameData.homeScreen[indexRequired].image=="non") then
- -- iconGroups[i].isVisible=false
---end 
+
 
   end
 end
@@ -1077,7 +1100,7 @@ local options =
 
 }
 
-    gameData.screenIndex=quickBtnLink
+    gameData.selectedCardIndex=quickBtnLink
 
     gameData.enterEditMode=true 
 
@@ -1253,7 +1276,6 @@ end
     if (iconGroups[j] ~= nil) then
      iconGroups[j]:removeEventListener("touch", movePlatform)
 
- 
       iconGroups[j]:addEventListener("touch", buildSentence)
 
     
@@ -1325,8 +1347,6 @@ end
     if (iconGroups[j] ~= nil) then
 
       iconGroups[j]:removeEventListener("touch", buildSentence)
-
-     
 
       if (iconGroups[j].myAudio ~="") then
       iconGroups[j]:addEventListener("touch", movePlatform)
@@ -1420,13 +1440,13 @@ if (gameData.enterEditMode==true) then
   enterEditMode()
 end  
 
-if (gameData.screenGridPositions [gameData.screenIndex]>1) then
+if (gameData.screenGridPositions [gameData.selectedCardIndex]>1) then
 
   for setUp=1, #screenGrid do
 
   --print (' i moved by '..gameData.screenGridPositions [gameData.screenIndex])
 
-  screenGrid[setUp].x = screenGrid[setUp].x-(480* (gameData.screenGridPositions [gameData.screenIndex]-1) )
+  screenGrid[setUp].x = screenGrid[setUp].x-(480* (gameData.screenGridPositions [gameData.selectedCardIndex]-1) )
 
   end
 end  
@@ -1452,7 +1472,7 @@ local gridsNeeded = math.ceil(#gameData.workingScreen/iconMax)
 
 if (gridsNeeded>1) then
 
-gridDisplayed = gameData.screenGridPositions[gameData.screenIndex]
+gridDisplayed = gameData.screenGridPositions[gameData.selectedCardIndex]
 
         if (gridDisplayed < #gridX) then
 

@@ -1,4 +1,7 @@
+
 local gameData = {}
+
+gameData.studentName="none"
 
 gameData.enterEditMode=true
 

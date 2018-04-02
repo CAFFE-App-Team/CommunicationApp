@@ -1,6 +1,13 @@
+
 local gameData = {}
 
+gameData.studentName="none"
+
 gameData.enterEditMode=true
+
+gameData.lastText=""
+gameData.lastImage=""
+gameData.lastAudio=""
 
 gameData.firstRun=true
 
@@ -33,8 +40,356 @@ gameData.showSoundName=""
 
 gameData.canTouch = true
 
+gameData.topics={}
 
-gameData.amarJoti = {
+
+--[[gameData.topics[1] = {
+ { text="আমি ", audio="ami", image="me", ind=1 },
+ { text="বাড়ি", audio="bari", image="home", ind=2 },
+ { text="ব্যথা", audio="batha", image="pain", ind=3 },
+ { text="চাই", audio="cai", image="want", ind=4 },
+ { text="দুঃখ", audio="dukkhito", image="sad", ind=5 },
+ { text="ঘুম", audio="ghum", image="sleep", ind=6 },
+ { text="খেতে", audio="khete", image="eat", ind=7 },
+ { text="খুশি", audio="khushi", image="happy", ind=8 },
+ { text="মাথা", audio="matha", image="head", ind=9 },
+ { text="পান", audio="pan", image="drink", ind=10 },
+ { text="পানি", audio="pani", image="water", ind=11 },
+ { text="পেট", audio="pet", image="stomach", ind=12 },
+ { text="পছন্দ", audio="pochondo", image="like", ind=13 },
+ { text="পছন্দ না", audio="pochondona", image="dontlike", ind=14 },
+ { text="স্কুল", audio="school", image="school", ind=15 },
+ { text="সমস্যা", audio="somossa", image="problem", ind=16 },
+ { text="সন্ধ্যা ভুজন", audio="sondavujon", image="dinner", ind=17 },
+ { text="তুমি", audio="tumi", image="you", ind=18 },
+ { text="উচ্চস্বর", audio="ucchoshor", image="loud", ind=19 },
+ { text="টয়লেট ", audio="toilet", image="toilet", ind=20 },
+ { text="", audio="", image="non", ind=21 },
+ { text="", audio="", image="non", ind=22 },
+ { text="", audio="", image="non", ind=23 },
+ { text="", audio="", image="non", ind=24 }
+}
+
+--bangla number
+gameData.topics[2] = {
+ { text="এক", audio="1", image="one", ind=1 },
+ { text="দুই", audio="2", image="two", ind=2 },
+ { text="তিন", audio="3", image="three", ind=3 },
+ { text="চার", audio="4", image="four", ind=4 },
+ { text="পাঁচ", audio="5", image="five", ind=5 },
+ { text="ছয়", audio="6", image="six", ind=6 },
+ { text="সাত", audio="7", image="seven", ind=7 },
+ { text="আট", audio="8", image="eight", ind=8 },
+ { text="নয়", audio="9", image="nine", ind=9 },
+ { text="শূন্য", audio="0", image="zero", ind=10 }
+}
+
+--english number
+gameData.topics[3] = {
+ { text="One", audio="1", image="1", ind=1 },
+ { text="Two", audio="2", image="2", ind=2 },
+ { text="Three", audio="3", image="3", ind=3 },
+ { text="Four", audio="4", image="4", ind=4 },
+ { text="Five", audio="5", image="5", ind=5 },
+ { text="Six", audio="6", image="6", ind=6 },
+ { text="Seven", audio="7", image="7", ind=7 },
+ { text="Eight", audio="8", image="8", ind=8 },
+ { text="Nine", audio="9", image="9", ind=9 },
+ { text="Zero", audio="0", image="0", ind=10 }
+}
+
+-- sorborno screen
+gameData.topics[4] = {
+{ text="অ", audio="a", image="a", ind=1 },
+{ text="আ", audio="aa", image="aa", ind=2 },
+{ text="", audio="i", image="i", ind=3 },
+{ text="", audio="ee", image="ee", ind=4 },
+{ text="", audio="u", image="u", ind=5 },
+{ text="", audio="oo", image="oo", ind=6 },
+{ text="", audio="ri", image="ri", ind=7 },
+{ text="", audio="ae", image="ae", ind=8 },
+{ text="", audio="aae", image="aae", ind=9 },
+{ text="", audio="o", image="o", ind=10},
+{ text="", audio="au", image="au", ind=11 },
+{ text="", audio="", image="non", ind=12 },
+{ text="", audio="", image="non", ind=13 },
+{ text="", audio="", image="non", ind=14 },
+{ text="", audio="", image="non", ind=15 },
+{ text="", audio="", image="non", ind=16 }
+}
+
+--borno
+
+gameData.topics[5] = {
+{ text="ক", audio="k", image="k", ind=1 },
+{ text="", audio="kh", image="kh", ind=2 },
+{ text="", audio="g", image="g", ind=3 },
+{ text="", audio="gh", image="gh", ind=4 },
+{ text="", audio="ng", image="ng", ind=5 },
+{ text="", audio="ch", image="ch", ind=6 },
+{ text="", audio="chh", image="chh", ind=7 },
+{ text="", audio="j", image="j", ind=8 },
+{ text="", audio="jh", image="jh", ind=9},
+{ text="", audio="n", image="n", ind=10 },
+{ text="", audio="t", image="t", ind=11 },
+{ text="", audio="tth", image="tth", ind=12 },
+{ text="", audio="d", image="d", ind=13 },
+{ text="", audio="ddh", image="ddh", ind=14 },
+{ text="", audio="nn", image="nn", ind=15 },
+{ text="", audio="thho", image="thho", ind=16 },
+{ text="", audio="th", image="th", ind=17 },
+{ text="", audio="the", image="the", ind=18 },
+{ text="", audio="thhe", image="thhe", ind=19},
+{ text="", audio="nnn", image="nnn", ind=20 },
+{ text="", audio="pa", image="pa", ind=21 },
+{ text="", audio="pha", image="pha", ind=22 },
+{ text="", audio="ba", image="ba", ind=23 },
+{ text="", audio="bha", image="bha", ind=24 },
+{ text="", audio="maa", image="maa", ind=25 },
+{ text="", audio="ya", image="ya", ind=26 },
+{ text="", audio="ra", image="ra", ind=27 },
+{ text="", audio="la", image="la", ind=28 },
+{ text="", audio="sa", image="sa", ind=29},
+{ text="", audio="shh", image="shh", ind=30},
+{ text="", audio="sshh", image="sshh", ind=31 },
+{ text="", audio="haa", image="haa", ind=32 },
+{ text="", audio="rhha", image="rhha", ind=33 },
+{ text="", audio="drha", image="drha", ind=34 },
+{ text="", audio="yaa", image="yaa", ind=35 },
+{ text="", audio="ktt", image="ktt", ind=36 },
+{ text="", audio="onn", image="onn", ind=37 },
+{ text="", audio="bss", image="bss", ind=38 },
+{ text="", audio="chn", image="chn", ind=39 },
+{ text="", audio="", image="non", ind=40 }
+}
+
+--english letters
+
+gameData.topics[6] = {
+{ text="A", audio="Aaaa", image="Aaaa", ind=1 },
+{ text="B", audio="Bb", image="Bb", ind=2 },
+{ text="C", audio="Cc", image="Cc", ind=3 },
+{ text="D", audio="Dd", image="Dd", ind=4 },
+{ text="E", audio="Eeee", image="Eeee", ind=5 },
+{ text="F", audio="Ff", image="Ff", ind=6 },
+{ text="G", audio="Gg", image="Gg", ind=7 },
+{ text="H", audio="Hh", image="Hh", ind=8 },
+{ text="I", audio="Ii", image="Ii", ind=9},
+{ text="J", audio="Jj", image="Jj", ind=10 },
+{ text="K", audio="Kk", image="Kk", ind=11 },
+{ text="L", audio="Ll", image="Ll", ind=12 },
+{ text="M", audio="Mm", image="Mm", ind=13 },
+{ text="N", audio="Nnnnn", image="Nnnnn", ind=14 },
+{ text="O", audio="Ooo", image="Ooo", ind=15 },
+{ text="P", audio="Pp", image="Pp", ind=16 },
+{ text="Q", audio="Qq", image="Qq", ind=17 },
+{ text="R", audio="Rr", image="Rr", ind=18 },
+{ text="S", audio="Ss", image="Ss", ind=19},
+{ text="T", audio="Tt", image="Tt", ind=20 },
+{ text="U", audio="Uu", image="Uu", ind=21 },
+{ text="V", audio="Vv", image="Vv", ind=22 },
+{ text="W", audio="Ww", image="Ww", ind=23 },
+{ text="X", audio="Xx", image="Xx", ind=24 },
+{ text="Y", audio="Yy", image="Yy", ind=25 },
+{ text="Z", audio="Zz", image="Zz", ind=26 },
+{ text="", audio="", image="non", ind=27 },
+{ text="", audio="", image="non", ind=28 },
+{ text="", audio="", image="non", ind=29},
+{ text="", audio="", image="non", ind=30},
+{ text="", audio="", image="non", ind=31 },
+{ text="", audio="", image="non", ind=32 }
+}
+
+
+--for amarjoti
+
+gameData.topics[7]={
+{ text=" বেসিন ", audio="besin", image="basin", ind=1 },
+{ text="বাটি", audio="bati", image="bati", ind=2 },
+{ text="বেঞ্চ", audio="bench", image="bench", ind=3 },
+{ text="চেয়ার", audio="chair", image="chair", ind=4 },
+{ text="ঘড়ি", audio="ghori", image="clock", ind=5 },
+{ text="কম্পিউটার", audio="computer", image="computer1", ind=6 },
+{ text="দরজা", audio="dorja", image="door1", ind=7 },
+{ text="ফ্যান", audio="fan", image="fan", ind=8 },
+{ text="গ্লাস", audio="glass", image="glass", ind=9 },
+{ text="থালা", audio="thala", image="plate", ind=10 },
+{ text="রুলার", audio="ruler", image="ruler", ind=11 },
+{ text="বিশেষ চেয়ার", audio="bisesChair", image="specialChair", ind=12 },
+{ text="চামচ", audio="chamoch", image="spoon", ind=13 },
+{ text="টুল", audio="tul", image="stool", ind=14 },
+{ text="সুইচ", audio="switch", image="switch", ind=15 },
+{ text="টেবিল", audio="table", image="table", ind=16 },
+{ text="টয়লেট", audio="toilet", image="toylet", ind=17 },
+{ text="", audio="", image="non", ind=18 },
+{ text="", audio="", image="non", ind=19 },
+{ text="", audio="", image="non", ind=20 },
+{ text="", audio="", image="non", ind=21 },
+{ text="", audio="", image="non", ind=22 },
+{ text="", audio="", image="non", ind=23 },
+{ text="", audio="", image="non", ind=24 }
+}
+
+--people
+gameData.topics[8]={
+{ text="মা", audio="ma", image="mum", ind=1 },
+{ text="বাবা", audio="baba", image="dad", ind=2 },
+{ text="ছেলে", audio="chele", image="boy", ind=3 },
+{ text="মেয়ে", audio="meye", image="girl", ind=4 },
+{ text="পুরুষ", audio="purush", image="man", ind=5 },
+{ text="মহিলা", audio="mohila", image="woman", ind=6 },
+{ text="পা", audio="paa", image="leg", ind=7 },
+{ text="মাথা", audio="matha", image="head", ind=8 },
+{ text="চুল", audio="chul", image="hair", ind=9 },
+{ text="হাত", audio="haath", image="arm", ind=10 },
+{ text="পেট", audio="pet", image="stomach", ind=11 },
+{ text="নাক", audio="nak", image="nose", ind=12 },
+{ text="চোখ", audio="chokh", image="eyes", ind=13 },
+{ text="কান", audio="kan", image="ear", ind=14 },
+{ text="মুখ", audio="mukh", image="mouth", ind=15 },
+{ text="দাঁত", audio="dath", image="teeth", ind=16 },
+{ text="", audio="", image="non", ind=17 },
+{ text="", audio="", image="non", ind=18 },
+{ text="", audio="", image="non", ind=19 },
+{ text="", audio="", image="non", ind=20 },
+{ text="", audio="", image="non", ind=21 },
+{ text="", audio="", image="non", ind=22 },
+{ text="", audio="", image="non", ind=23 },
+{ text="", audio="", image="non", ind=24 },
+{ text="", audio="", image="non", ind=25 },
+{ text="", audio="", image="non", ind=26 },
+{ text="", audio="", image="non", ind=27 },
+{ text="", audio="", image="non", ind=28 },
+{ text="", audio="", image="non", ind=29 },
+{ text="", audio="", image="non", ind=30 },
+{ text="", audio="", image="non", ind=31 },
+{ text="", audio="", image="non", ind=32 }
+}
+
+
+--action
+gameData.topics[9]={
+{ text="যেতে", audio="jete", image="go", ind=1 },
+{ text="হাঁটা", audio="hata", image="walk", ind=2 },
+{ text="ধোয়া", audio="dhoya", image="wash", ind=3 },
+--{ text="", audio="", image="run", ind=3 },
+{ text="খাওয়া", audio="khawa", image="eat", ind=4 },
+{ text="খেলা", audio="khela", image="game", ind=5 },
+{ text="বসো", audio="boso", image="sit", ind=6 },
+{ text="দাড়াও", audio="Daraw", image="stand", ind=7 },
+{ text="সমস্যা", audio="smasswa", image="problem", ind=8 },
+
+{ text="গান", audio="gan", image="music", ind=9 },
+{ text="", audio="", image="non", ind=10 },
+{ text="", audio="", image="non", ind=11 },
+{ text="", audio="", image="non", ind=12 },
+{ text="", audio="", image="non", ind=13 },
+{ text="", audio="", image="non", ind=14 },
+{ text="", audio="", image="non", ind=15 },
+{ text="", audio="", image="non", ind=16 }
+}
+
+
+--emotion
+gameData.topics[10]={
+{ text="খুশি", audio="khushi", image="happy", ind=1 },
+{ text="দুঃখ", audio="dukho", image="sad", ind=2 },
+{ text="পছন্দ না", audio="pochondona", image="dontlike", ind=3 },
+{ text="", audio="", image="non", ind=4 },
+{ text="", audio="", image="non", ind=5 },
+{ text="", audio="", image="non", ind=6 },
+{ text="", audio="", image="non", ind=7 },
+{ text="", audio="", image="non", ind=8 },
+{ text="", audio="", image="non", ind=9 },
+{ text="", audio="", image="non", ind=10 },
+{ text="", audio="", image="non", ind=11 },
+{ text="", audio="", image="non", ind=12 },
+{ text="", audio="", image="non", ind=13 },
+{ text="", audio="", image="non", ind=14 },
+{ text="", audio="", image="non", ind=15 },
+{ text="", audio="", image="non", ind=16 }
+
+}
+
+--color
+gameData.topics[11] = {
+{ text="লাল", audio="lal", image="red", ind=1 },
+{ text="হলুদ", audio="holud", image="yellow", ind=2 },
+{ text="সবুজ", audio="sobuj", image="green", ind=3 },
+{ text="নীল", audio="nil", image="blue", ind=4 },
+{ text="কালো", audio="kalo", image="black", ind=5 },
+{ text="সাদা", audio="shada", image="white", ind=6 },
+{ text="গোলাপী", audio="golapi", image="pink", ind=7 },
+{ text="বেগুনি", audio="beguni", image="purple", ind=8 },
+{ text="কমলা", audio="komola", image="orange", ind=9 },
+{ text="বাদামী", audio="badami", image="brown", ind=10 },
+{ text="ধূসর", audio="dushor", image="grey", ind=11 },
+{ text="রূপালী", audio="rupali", image="silver", ind=12 },
+{ text="সোনালী", audio="sonali", image="golden", ind=13 },
+{ text="", audio="", image="non", ind=14 },
+{ text="", audio="", image="non", ind=15 },
+{ text="", audio="", image="non", ind=16 }
+}
+
+--toys
+gameData.topics[12] = {
+	{ text="খেলনা", audio="khelna", image="toy1", ind=1 },
+{ text="খেলনা", audio="khelna", image="toy2", ind=2 },
+{ text="খেলনা", audio="khelna", image="toy3", ind=3 },
+{ text="খেলনা", audio="khelna", image="toy4", ind=4 },
+{ text="খেলনা", audio="khelna", image="toy5", ind=5 },
+{ text="খেলনা", audio="khelna", image="toy6", ind=6 },
+{ text="খেলনা", audio="khela", image="toy7", ind=7 },
+{ text="খেলনা", audio="khelna", image="toy8", ind=8 },
+{ text="খেলনা", audio="khelna", image="toy10", ind=9 },
+{ text="খেলনা", audio="khelna", image="toy11", ind=10 },
+{ text="খেলনা", audio="khelna", image="toy12", ind=11 },
+{ text="খেলনা পুতুল", audio="khelnaPutul", image="toyBear", ind=12 },
+{ text="খেলনা গাড়ি", audio="khelnaGari", image="toyCar1", ind=13 },
+{ text="খেলনা গাড়ি", audio="khelnaGari", image="toyCar2", ind=14 },
+{ text="খেলনা গাড়ি", audio="khelnaGari", image="toyCar3", ind=15 },
+{ text="খেলনা গাড়ি", audio="khelnaGari", image="toyCar4", ind=16 },
+{ text="খেলনা পুতুল", audio="khelnaPutul", image="toyDoll2", ind=17 },
+{ text="খেলনা পুতুল", audio="khelnaPutul", image="toyDoll3", ind=18 },
+{ text="খেলনা ক্যাঙ্গারু", audio="khelnaKengaru", image="toyKangaroo", ind=19 },
+{ text="খেলনা সিংহ", audio="khelnaShinho", image="toyLion", ind=20 },
+{ text="", audio="", image="non", ind=21 },
+{ text="", audio="", image="non", ind=22 },
+{ text="", audio="", image="non", ind=23 },
+{ text="", audio="", image="non", ind=24 },
+{ text="", audio="", image="non", ind=25 },
+{ text="", audio="", image="non", ind=26 },
+{ text="", audio="", image="non", ind=27 },
+{ text="", audio="", image="non", ind=28 },
+{ text="", audio="", image="non", ind=29 },
+{ text="", audio="", image="non", ind=30 },
+{ text="", audio="", image="non", ind=31 },
+{ text="", audio="", image="non", ind=32 }
+}
+
+
+--story
+gameData.topics[13] = {
+ { text="", audio="", image="story1", ind=1 },
+ { text="", audio="", image="story2", ind=2 },
+ { text="", audio="", image="story3", ind=3 },
+ { text="", audio="", image="story4", ind=4 },
+ { text="", audio="", image="story5", ind=5 },
+ { text="", audio="", image="story6", ind=6 },
+ { text="", audio="", image="story7", ind=7 },
+ { text="", audio="", image="story8", ind=8 },
+ { text="", audio="", image="story9", ind=9 },
+ { text="", audio="", image="story10", ind=10 },
+ { text="", audio="", image="story11", ind=11 },
+ { text="", audio="", image="story12", ind=12 },
+ { text="", audio="", image="story13", ind=13 },
+ { text="", audio="", image="non", ind=14 },
+ { text="", audio="", image="non", ind=15 },
+ { text="", audio="", image="non", ind=16 }
+}
+--]]
+
+--[[gameData.amarJoti = {
 
 { text=" বেসিন ", audio="besin", image="basin", ind=1 },
 { text="বাটি", audio="bati", image="bati", ind=2 },
@@ -413,7 +768,7 @@ gameData.storyScreen = {
  { text="", audio="", image="non", ind=16 }
  
 
-}
+}--]]
 
 
 gameData.workingScreen = {
@@ -445,7 +800,7 @@ gameData.workingScreenNumber = {
 }
 
 
-
+  gameData.mainMenuItems = {}
 
   gameData.screenList = {
 
@@ -462,12 +817,6 @@ gameData.workingScreenNumber = {
   {screen=gameData.emotionScreen, name="emotionScreen"},
   {screen=gameData.colourScreen, name="colourScreen"},
   {screen=gameData.storyScreen, name="storyScreen"}
-
-  
-
-
-  
- 
 
   }
 

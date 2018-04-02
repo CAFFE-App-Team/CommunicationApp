@@ -243,7 +243,8 @@ print ("i loaded")
 
 
 
-    gameData.workingScreenNumber=gameData.screenList[gameData.screenIndex].screen
+
+       gameData.workingScreenNumber= gameData.topics[gameData.selectedCardIndex]
 
 
   quickBtnLink=1
@@ -251,7 +252,7 @@ print ("i loaded")
 
  
 
- gameData.lastScreenIndex = gameData.screenIndex
+ gameData.lastScreenIndex = gameData.selectedCardIndex
 
 
 
@@ -318,7 +319,7 @@ end
         end
 
 
-      gameData.screenGridPositions[gameData.screenIndex] = gridDisplayed
+      gameData.screenGridPositions[gameData.selectedCardIndex] = gridDisplayed
       loadsave.saveTable (gameData.screenGridPositions, "screenGridPositions.json" )
 
      end 
@@ -363,7 +364,7 @@ end
 
         end
 
-      gameData.screenGridPositions[gameData.screenIndex] = gridDisplayed
+      gameData.screenGridPositions[gameData.selectedCardIndex] = gridDisplayed
       loadsave.saveTable (gameData.screenGridPositions, "screenGridPositions.json" )
 
      end 
@@ -920,11 +921,11 @@ local options =
 
 }
 
-    gameData.screenIndex=quickBtnLink
+    gameData.selectedCardIndex=quickBtnLink
 
     gameData.enterEditMode=true 
 
-    print ("my screen index to go to is "..gameData.screenIndex)
+    print ("my screen index to go to is "..gameData.selectedCardIndex)
 
 --composer.removeScene("game")
 --composer.gotoScene("game", {effect="crossFade", time=400})
@@ -1249,13 +1250,13 @@ if (gameData.enterEditMode==true) then
   enterEditMode()
 end  
 
-if (gameData.screenGridPositions [gameData.screenIndex]>1) then
+if (gameData.screenGridPositions [gameData.selectedCardIndex]>1) then
 
   for setUp=1, #screenGrid do
 
-  print (' i moved by '..gameData.screenGridPositions [gameData.screenIndex])
+  print (' i moved by '..gameData.screenGridPositions [gameData.selectedCardIndex])
 
-  screenGrid[setUp].x = screenGrid[setUp].x-(465* (gameData.screenGridPositions [gameData.screenIndex]-1) )
+  screenGrid[setUp].x = screenGrid[setUp].x-(465* (gameData.screenGridPositions [gameData.selectedCardIndex]-1) )
 
   end
 end  
@@ -1265,7 +1266,7 @@ local gridsNeeded = math.ceil(#gameData.workingScreenNumber/iconMax)
 
 if (gridsNeeded>1) then
 
-gridDisplayed = gameData.screenGridPositions[gameData.screenIndex]
+gridDisplayed = gameData.screenGridPositions[gameData.selectedCardIndex]
 
         if (gridDisplayed < #gridX) then
 

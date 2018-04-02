@@ -2,6 +2,7 @@ local composer = require( "composer" )
 local gameData = require( "gameData" )
 local widget = require( "widget" )
 local lfs = require "lfs"
+local App42API = require("App42-Lua-API.App42API")
  
 local scene = composer.newScene()
  
@@ -166,6 +167,10 @@ local function  setSound( event)
     if(event.phase == "began") then
 
      gameData.workingScreen[gameData.indexEdit].audio=event.target.soundName
+
+     -- experiment to check src
+
+      gameData.workingScreen[gameData.indexEdit].src="custom"
     
 
        print ("go")
@@ -292,7 +297,26 @@ return canDelete
 
 end 
 
+local function deleteSoundFromServer(fileName)
 
+    local fileName = fileName;
+    local userName = gameData.studentName
+local App42CallBack = {}
+App42API:initialize("e1ab95c1cd21bd9d5e45fda6ac6fac73a233425f14d7c32beee1671a13a18174","dab972571a4b1f0c02fb34620ebfecc232a29fef2ccedac52c1e1d269d2a223c")
+local uploadService  = App42API:buildUploadService()
+--uploadService:removeFileByName(fileName,App42CallBack)
+uploadService:removeFileByUser( fileName, userName,App42CallBack)
+function App42CallBack:onSuccess(object)        
+    print("Response is :"..object:getStrResponse());
+end  
+function App42CallBack:onException(exception)
+    print("Message is : "..exception:getMessage())
+    print("App Error code is : "..exception:getAppErrorCode())
+    print("Http Error code is "..exception:getHttpErrorCode())
+    print("Detail is : "..exception:getDetails())
+end 
+
+end 
 
 
 local function deleteSound(event)
@@ -333,6 +357,7 @@ print ("to delete is "..fileToDelete)
               
             if result then
                print( "File removed" )
+               deleteSoundFromServer(fileToDelete)
 
 
             else

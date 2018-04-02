@@ -3,6 +3,13 @@ local gameData = require( "gameData" )
 local loadsave = require( "loadsave" )
 local barScene = require "barScene"
 local usageData = require "usageData"
+local gameData = require( "gameData" )
+local timeData = require( "timeData" )
+local cardData = require( "cardData" )
+local studentUsers = require( "studentUsers" )
+ 
+local JSON = require("App42-Lua-API.JSON")
+local App42API = require("App42-Lua-API.App42API") 
  
 local scene = composer.newScene()
  
@@ -47,9 +54,27 @@ function scene:create( event )
 gameData.isNumberScreen=false
 gameData.workingScreen=nil
 
+ if (loadsave.loadTable( "classMode.json") ~= nil) then
 gameData.classMode = loadsave.loadTable( "classMode.json")
+end
 
+ if (loadsave.loadTable( "timeData.json") ~= nil) then
+usageData.timeData = loadsave.loadTable( "timeData.json")
+end
+
+ if (loadsave.loadTable( "gridSize.json") ~= nil) then
 gameData.size = loadsave.loadTable( "gridSize.json")
+end
+
+ if (loadsave.loadTable( "studentName.json") ~= nil) then
+gameData.studentName = loadsave.loadTable( "studentName.json")
+cardData.studentName = loadsave.loadTable( "studentName.json")
+end
+
+
+usageData.sampleData[1].text=gameData.studentName
+
+print ("main menu samp data "..usageData.sampleData[1].text)
 
 if (gameData.size==nil) then
   gameData.size="m"
@@ -81,9 +106,13 @@ if (gameData.size==nil) then
       gameData.homeScreenGridPosition = loadsave.loadTable( "homeScreenGridPosition.json")
       end
 
-      if (loadsave.loadTable( "sampleData.json" ) ~= nil) then
+--[[      if (loadsave.loadTable( "sampleData.json" ) ~= nil) then
       usageData.sampleData = loadsave.loadTable( "sampleData.json")
       end
+
+    if (loadsave.loadTable( "sentenceData.json" ) ~= nil) then
+      usageData.sentences = loadsave.loadTable( "sentenceData.json")
+      end--]]
    
 
 --[[    local bg = display.newImageRect ("whiteBG.png", display.contentWidth, display.contentHeight)
@@ -221,20 +250,23 @@ end
 
 }
 
-local name = event.target.name
+--local name = event.target.name
 
+gameData.selectedCardIndex = event.target.index
 
-for match = 1, #gameData.screenList do
+--[[for match = 1, #gameData.screenList do
   if (gameData.screenList[match].name == name) then
     gameData.screenIndex=match
   end
-end
+end--]]
 
-if (gameData.screenIndex == 2 or gameData.screenIndex == 3) then
+if (gameData.selectedCardIndex == 2 or gameData.selectedCardIndex == 3) then
 
     gameData.enterEditMode=true 
 
     composer.gotoScene( "number", options ) 
+
+    -- do number page
 
   else
 
@@ -255,12 +287,43 @@ if (gameData.screenIndex == 2 or gameData.screenIndex == 3) then
  local size = 68
  local startX = 80
  local startY = 200
- local gap = 80   
+ local gap = 80
+ local nextScreen = 0 
+ local gridCount=1  
+
+ for buttonCount = 1, #gameData.mainMenuItems do
+
+  buttons[buttonCount] = display.newImageRect ("category/"..gameData.mainMenuItems[buttonCount]..".png", size, size)
+  buttons[buttonCount].x = startX
+  buttons[buttonCount].y = startY
+  buttons[buttonCount].index = buttonCount
+
+
+
+  screenGrid[gridCount]:insert(buttons[buttonCount])
+  buttons[buttonCount]:addEventListener("touch", loadScreen)
+
+  startX = startX + gap
+
+
+
+ if (buttonCount % 4 == 0) then
+  print ('new screen')
+  nextScreen = nextScreen + 465
+    startX = nextScreen+80
+    
+    gap = 80
+    gridCount=gridCount+1
+
+  end
+
+ end 
  
- buttons[1] = display.newImageRect( "category/school.png", size,size)
+--[[ buttons[1] = display.newImageRect( "category/school.png", size,size)
  buttons[1].x = startX
  buttons[1].y = startY
- buttons[1].name = "amarJoti"
+ buttons[1].name = "amarJotiNoti"
+ buttons[1].index = 7
  screenGrid[1]:insert(buttons[1])
 
 buttons[1]:addEventListener( "touch", loadScreen )
@@ -344,7 +407,7 @@ buttons[1]:addEventListener( "touch", loadScreen )
  buttons[11].y = startY
  buttons[11].name = "englishNumberScreen"
  screenGrid[3]:insert(buttons[11])
- buttons[11]:addEventListener( "touch", loadScreen )
+ buttons[11]:addEventListener( "touch", loadScreen )--]]
 
 
  -- buttons[12] = display.newImageRect( "category/colours.png",size,size)
@@ -356,7 +419,7 @@ buttons[1]:addEventListener( "touch", loadScreen )
 
 -- nextScreen = 465*3
 
- buttons[12] = display.newImageRect( "category/common.png",size,size)
+--[[ buttons[12] = display.newImageRect( "category/common.png",size,size)
  buttons[12].x = startX+nextScreen+(3*gap)
  buttons[12].y = startY
  buttons[12].name = "commonScreen"
@@ -370,7 +433,7 @@ buttons[1]:addEventListener( "touch", loadScreen )
  buttons[13].y = startY
  buttons[13].name = "storyScreen"
  screenGrid[4]:insert(buttons[13])
- buttons[13]:addEventListener( "touch", loadScreen )
+ buttons[13]:addEventListener( "touch", loadScreen )--]]
 
 --[[  buttons[13] = display.newImageRect( "category/stories.png",size,size)
  buttons[13].x = startX+nextScreen+(3*gap*2)
@@ -532,7 +595,7 @@ settingsBtn:addEventListener("touch", enterSettings)
 local commonBtn = display.newImageRect( "category/common.png", 50,50)
 commonBtn.x=display.contentWidth-35
 commonBtn.y=220
-
+commonBtn.index = 1
 sceneGroup:insert(commonBtn)
 
 commonBtn:addEventListener( "touch", loadScreen )
@@ -569,11 +632,249 @@ end
 local dataBtn = display.newImageRect( "dataBtnInvisi.png", 25,25)
 dataBtn.x=30
 dataBtn.y=270
-dataBtn.alpha=0.1
+dataBtn.alpha=0.5
 
 sceneGroup:insert(dataBtn)
 
 dataBtn:addEventListener( "touch", loadDataScreen )
+
+
+--remp studd here
+
+function sendDataManual(event)
+
+   if ( event.phase == "began" ) then
+
+     local t = os.date( '*t' )
+
+    local seconds =  os.time( t ) - gameData.startTime
+
+      local minutesLeft = seconds / 60
+      local myHours = round (minutesLeft / 60)
+      local myMinutes = round (minutesLeft - (myHours*60))
+       
+
+      table.insert( usageData.timeData,  { date=os.date( "%c" ), hours=myHours, minutes=myMinutes }  )
+
+
+    loadsave.saveTable (usageData.timeData, "timeData.json" )
+
+local function setUpTable() 
+
+local dbName  = "WORDFREQUENCY"
+local collectionName = "wordStats"
+local jsonTable = {}
+jsonTable = JSON:encode(usageData)
+local App42CallBack = {}
+App42API:initialize("e1ab95c1cd21bd9d5e45fda6ac6fac73a233425f14d7c32beee1671a13a18174","dab972571a4b1f0c02fb34620ebfecc232a29fef2ccedac52c1e1d269d2a223c")
+local storageService = App42API:buildStorageService()
+storageService:insertJSONDocument(dbName, collectionName, jsonTable ,App42CallBack)
+function App42CallBack:onSuccess(object)
+  print ("setup first")
+
+local dbName  = "WORDFREQUENCY"
+local collectionName = "wordStats"
+local jsonTable = {}
+jsonTable = JSON:encode(cardData)
+local App42CallBack = {}
+App42API:initialize("e1ab95c1cd21bd9d5e45fda6ac6fac73a233425f14d7c32beee1671a13a18174","dab972571a4b1f0c02fb34620ebfecc232a29fef2ccedac52c1e1d269d2a223c")
+local storageService = App42API:buildStorageService()
+storageService:insertJSONDocument(dbName, collectionName, jsonTable ,App42CallBack)
+function App42CallBack:onSuccess(object)
+  print ("setup first")
+end
+function App42CallBack:onException(exception)
+    print("Message is : "..exception:getMessage())
+    print("App Error code is : "..exception:getAppErrorCode())
+    print("Http Error code is "..exception:getHttpErrorCode())
+    print("Detail is : "..exception:getDetails())
+end
+
+
+end
+function App42CallBack:onException(exception)
+    print("Message is : "..exception:getMessage())
+    print("App Error code is : "..exception:getAppErrorCode())
+    print("Http Error code is "..exception:getHttpErrorCode())
+    print("Detail is : "..exception:getDetails())
+end
+
+
+end    
+
+if (gameData.studentName~="none") then
+
+
+local dbName  = "WORDFREQUENCY"
+local collectionName = "wordStats"
+local key = "sampleData.text"
+local value = gameData.studentName
+print ("value is "..gameData.studentName)
+local jsonTable = {}
+jsonTable = JSON:encode(usageData)
+local App42CallBack = {}
+App42API:initialize("e1ab95c1cd21bd9d5e45fda6ac6fac73a233425f14d7c32beee1671a13a18174","dab972571a4b1f0c02fb34620ebfecc232a29fef2ccedac52c1e1d269d2a223c")
+local storageService = App42API:buildStorageService()
+storageService:updateDocumentByKeyValue(dbName,collectionName,key,value,jsonTable,App42CallBack)
+function App42CallBack:onSuccess(object)
+    print ("UPDATED")
+    local dbName  = "WORDFREQUENCY"
+    local collectionName = "wordStats"
+    local key = "studentName"
+    local value = gameData.studentName
+    print ("value is "..gameData.studentName)
+    local jsonTable = {}
+    jsonTable = JSON:encode(cardData)
+    local App42CallBack = {}
+    App42API:initialize("e1ab95c1cd21bd9d5e45fda6ac6fac73a233425f14d7c32beee1671a13a18174","dab972571a4b1f0c02fb34620ebfecc232a29fef2ccedac52c1e1d269d2a223c")
+    local storageService = App42API:buildStorageService()
+    storageService:updateDocumentByKeyValue(dbName,collectionName,key,value,jsonTable,App42CallBack)
+    function App42CallBack:onSuccess(object)
+        print ("UPDATED")
+    end
+    function App42CallBack:onException(exception)
+        print("Message is : "..exception:getMessage())
+        print("App Error code is : "..exception:getAppErrorCode())
+        print("Http Error code is "..exception:getHttpErrorCode())
+        print("Detail is : "..exception:getDetails())
+
+    end
+
+
+end
+function App42CallBack:onException(exception)
+    print("Message is : "..exception:getMessage())
+    print("App Error code is : "..exception:getAppErrorCode())
+    print("Http Error code is "..exception:getHttpErrorCode())
+    print("Detail is : "..exception:getDetails())
+
+    setUpTable();
+
+end
+
+end
+
+end
+
+end
+
+
+local function sendNames(event)
+
+ if ( event.phase == "began" ) then
+
+print ('sender')
+
+local dbName  = "WORDFREQUENCY"
+local collectionName = "wordStats"
+local jsonTable = {}
+jsonTable = JSON:encode(studentUsers)
+local App42CallBack = {}
+App42API:initialize("e1ab95c1cd21bd9d5e45fda6ac6fac73a233425f14d7c32beee1671a13a18174","dab972571a4b1f0c02fb34620ebfecc232a29fef2ccedac52c1e1d269d2a223c")
+local storageService = App42API:buildStorageService()
+storageService:insertJSONDocument(dbName, collectionName, jsonTable ,App42CallBack)
+function App42CallBack:onSuccess(object)
+  print ("setup first")
+end
+
+function App42CallBack:onException(exception)
+
+end
+
+end
+
+return true
+
+end
+
+local function getImage()
+
+  local function beginFileDownload(myUrl, myFile,fileType)
+
+    local function networkListener( event )
+    if ( event.isError ) then
+        print( "Network error - download failed: ", event.response )
+    elseif ( event.phase == "began" ) then
+        print( "Progress Phase: began" )
+    elseif ( event.phase == "ended" ) then
+        print( "Displaying response image file" )
+--[[        myImage = display.newImage( event.response.filename, event.response.baseDirectory, 60, 40 )
+        myImage.alpha = 0
+        transition.to( myImage, { alpha=1.0 } )--]]
+    end
+end
+
+
+ 
+local params = {}
+params.progress = true
+ 
+network.download(
+    myUrl,
+    "GET",
+    networkListener,
+    params,
+    fileType.."/"..myFile,
+    system.DocumentsDirectory
+)
+
+  end  
+
+
+local userName = gameData.studentName;
+local App42CallBack = {}
+App42API:initialize("e1ab95c1cd21bd9d5e45fda6ac6fac73a233425f14d7c32beee1671a13a18174","dab972571a4b1f0c02fb34620ebfecc232a29fef2ccedac52c1e1d269d2a223c")
+local uploadService  = App42API:buildUploadService()
+uploadService:getAllFilesByUser(userName,App42CallBack)
+function App42CallBack:onSuccess(object)  
+  if table.getn(object:getFileList()) >1 then   
+  for m=1,table.getn(object:getFileList()) do  
+ 
+    if (object:getFileList()[m]:getType()=="UploadFileType.AUDIO") then
+      local myType = "sounds"
+      beginFileDownload (object:getFileList()[m]:getUrl(), object:getFileList()[m]:getName(), myType )
+
+      elseif (object:getFileList()[m]:getType() == "UploadFileType.IMAGE") then
+              local myType = "images"
+      beginFileDownload (object:getFileList()[m]:getUrl(), object:getFileList()[m]:getName(), myType )
+
+      end
+
+    print("fileName is :".. object:getFileList()[m]:getName()); 
+    print("Username is :".. object:getFileList()[m]:getUserName()); 
+    print("Type is :".. object:getFileList()[m]:getType());     
+    print("Url is :".. object:getFileList()[m]:getUrl());  
+    print("Description is: ".. object:getFileList()[m]:getDescription());  
+  end
+  else     
+    print("fileName is :".. object:getFileList():getName());
+    print("Username is :".. object:getFileList():getUserName());  
+    print("Type is :".. object:getFileList():getType());     
+    print("Url is :".. object:getFileList():getUrl());  
+    print("fileDescription is: ".. object:getFileList():getDescription());  
+  end
+end  
+function App42CallBack:onException(exception)
+  print("Message is : "..exception:getMessage())
+  print("App Error code is : "..exception:getAppErrorCode())
+  print("Http Error code is "..exception:getHttpErrorCode())
+  print("Detail is : "..exception:getDetails())
+end
+
+
+end
+
+
+--[[local sendBtn = display.newImageRect( "dataBtnInvisi.png", 25,25)
+sendBtn.x=200
+sendBtn.y=270
+sendBtn.alpha=1
+
+sceneGroup:insert(sendBtn)--]]
+
+--sendBtn:addEventListener( "touch", sendDataManual)
+
+--sendBtn:addEventListener( "touch", getImage)
 
 
 

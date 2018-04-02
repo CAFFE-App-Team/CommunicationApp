@@ -2,6 +2,8 @@ local composer = require( "composer" )
 local gameData = require( "gameData" )
 local widget = require( "widget" )
 local lfs = require "lfs"
+local App42API = require("App42-Lua-API.App42API")
+local mime=require("mime")
 
 local scene = composer.newScene()
  
@@ -355,16 +357,53 @@ end
   
         if result then
 
-            --newly recorded sound was being set as card sound straight away... removed this
-            --hope for new ill effects!
+            --upload sound
 
---[[            print( "File renamed to "..enteredText )
-            --soundSaved=true
-            oldFileName=enteredText..".wav"
-            gameData.workingScreen[gameData.indexEdit].audio=enteredText
-            shouldRename=false
-            table.insert( thisTimeName, enteredText)
-            native.setKeyboardFocus( nil )--]]
+    local myName = enteredText..".wav"
+
+    local myPath = system.pathForFile( "sounds/"..enteredText..".wav", system.DocumentsDirectory )
+
+
+
+    print ('name is '..myPath)
+
+    local encodedName= mime.b64(myName)
+
+    print ('encoded '..encodedName)
+
+    local fixedName = encodedName:gsub('/','@')
+
+     print ('encoded '..fixedName)
+
+     local fixedName2 = fixedName:gsub('=','&')
+
+     print ('encoded '..fixedName2)
+
+local fileName = fixedName2;
+local userName = gameData.studentName
+local description = "File Description";    
+local filePath = myPath;
+local fileType = "UploadFileType.AUDIO"; 
+local App42CallBack = {}
+App42API:initialize("e1ab95c1cd21bd9d5e45fda6ac6fac73a233425f14d7c32beee1671a13a18174","dab972571a4b1f0c02fb34620ebfecc232a29fef2ccedac52c1e1d269d2a223c")
+local uploadService  = App42API:buildUploadService()
+--uploadService:uploadFile(fileName,filePath ,fileType,description,App42CallBack)
+uploadService:uploadFileForUser(fileName,userName,filePath ,fileType,description,App42CallBack) 
+function App42CallBack:onSuccess(object)   
+    print("fileName is :".. object:getFileList():getName()); 
+    print("Type is :".. object:getFileList():getType());     
+    print("Url is :".. object:getFileList():getUrl());  
+    print("fileDescription is: ".. object:getFileList():getDescription());         
+end  
+function App42CallBack:onException(exception)
+    print("Message is : "..exception:getMessage())
+    print("App Error code is : "..exception:getAppErrorCode())
+    print("Http Error code is "..exception:getHttpErrorCode())
+    print("Detail is : "..exception:getDetails())
+end
+
+    
+
         else
             print( "File not renamed", reason )  --> File not renamed    orange.txt: No such file or directory
         
@@ -389,6 +428,9 @@ end
     end
 
     end  
+
+
+
 
 local function onCompleteSound (event)
     fSoundPlaying = false
