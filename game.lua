@@ -267,9 +267,12 @@ end
 
     gameData.workingScreen= gameData.topics[gameData.selectedCardIndex]
 
+    print ("i am this text "..gameData.pictureScale[gameData.selectedCardIndex])
+   -- pictureScale = gameData.pictureScale[gameData.selectedCardIndex]
+
     --gameData.screenList[gameData.screenIndex].screen
 
-
+--[[
 if (gameData.selectedCardIndex==4) then
    print("it is working")
    pictureScale=70
@@ -294,6 +297,8 @@ if (gameData.selectedCardIndex==4) then
    pictureScale=55
    --iconImage.y = startY - 10*iconScale
  end  
+
+ ]]--
 
    if (gameData.selectedCardIndex==1) then
    print("it is common")

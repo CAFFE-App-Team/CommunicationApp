@@ -653,11 +653,11 @@ if(event.phase == "began" and midReading==false) then
 
           local soundToPlay = nil
 
-          if (src=="local") then
+         
 
             soundToPlay = audio.loadSound( "voice/"..englishFolder..soundName..".mp3" )
 
-          else
+           if (soundToPlay==nil) then
              soundToPlay = audio.loadSound( "sounds/"..soundName..".wav", system.DocumentsDirectory  )
 
           end

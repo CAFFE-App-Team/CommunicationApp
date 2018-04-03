@@ -89,6 +89,11 @@ function scene:create( event )
                     for i = 1, #gameData.topics do
 
                     table.insert( gameData.mainMenuItems, gameData.topics[i][1].text   )
+                    table.insert (gameData.pictureScale, gameData.topics[i][1].ind)
+
+                      print ("login")
+                      print (gameData.mainMenuItems[i].."  "..gameData.pictureScale[i])
+
                     table.remove( gameData.topics[i], 1)
 
                     end
@@ -151,6 +156,12 @@ function scene:create( event )
                     for i = 1, #gameData.topics do
 
                     table.insert( gameData.mainMenuItems, gameData.topics[i][1].text   )
+
+                    table.insert (gameData.pictureScale, gameData.topics[i][1].ind)
+
+                      print ("login")
+                      print (gameData.mainMenuItems[i].."  "..gameData.pictureScale[i])
+
                     table.remove( gameData.topics[i], 1)
 
                     end

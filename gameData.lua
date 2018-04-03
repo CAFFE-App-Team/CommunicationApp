@@ -770,6 +770,8 @@ gameData.storyScreen = {
 
 }--]]
 
+gameData.pictureScale = {}
+
 
 gameData.workingScreen = {
   
@@ -812,6 +814,7 @@ gameData.workingScreenNumber = {
   {screen=gameData.englishLetterScreen, name="englishLetterScreen"},
   {screen=gameData.amarJoti, name="amarJoti"},
   {screen=gameData.toysScreen, name="toysScreen"},
+  {screen=gameData.toysScreen, name="toysScreen2"},
   {screen=gameData.peopleScreen, name="peopleScreen"},
   {screen=gameData.actionScreen, name="actionScreen"},
   {screen=gameData.emotionScreen, name="emotionScreen"},

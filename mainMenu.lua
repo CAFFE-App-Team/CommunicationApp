@@ -290,6 +290,7 @@ if (gameData.selectedCardIndex == 2 or gameData.selectedCardIndex == 3) then
  local gap = 80
  local nextScreen = 0 
  local gridCount=1  
+ 
 
  for buttonCount = 1, #gameData.mainMenuItems do
 
