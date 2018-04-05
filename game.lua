@@ -267,8 +267,7 @@ end
 
     gameData.workingScreen= gameData.topics[gameData.selectedCardIndex]
 
-    print ("i am this text "..gameData.pictureScale[gameData.selectedCardIndex])
-   -- pictureScale = gameData.pictureScale[gameData.selectedCardIndex]
+ 
 
     --gameData.screenList[gameData.screenIndex].screen
 

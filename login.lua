@@ -91,8 +91,7 @@ function scene:create( event )
                     table.insert( gameData.mainMenuItems, gameData.topics[i][1].text   )
                     table.insert (gameData.pictureScale, gameData.topics[i][1].ind)
 
-                      print ("login")
-                      print (gameData.mainMenuItems[i].."  "..gameData.pictureScale[i])
+      
 
                     table.remove( gameData.topics[i], 1)
 
@@ -159,8 +158,7 @@ function scene:create( event )
 
                     table.insert (gameData.pictureScale, gameData.topics[i][1].ind)
 
-                      print ("login")
-                      print (gameData.mainMenuItems[i].."  "..gameData.pictureScale[i])
+                   
 
                     table.remove( gameData.topics[i], 1)
 

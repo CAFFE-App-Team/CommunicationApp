@@ -3,6 +3,8 @@ local gameData = require( "gameData" )
 local widget = require( "widget" )
 local lfs = require "lfs"
 local loadsave = require( "loadsave" ) 
+local App42API = require("App42-Lua-API.App42API")
+local imageCrop = require "plugin.imageCrop"
  
 local scene = composer.newScene()
  
@@ -216,13 +218,65 @@ for i=1, imageCounter do
    
 
 return imageSuffix
+end  
+
+
+local function uploadImage()
+
+    local myName = imageCounter..".jpg"
+
+    local myPath = system.pathForFile( "images/"..imageCounter..".jpg", system.DocumentsDirectory )
+
+
+
+    print ('name is '..myPath)
+
+local fileName = myName;
+local userName = gameData.studentName
+local description = "File Description";    
+local filePath = myPath;
+local fileType = "UploadFileType.IMAGE"; 
+local App42CallBack = {}
+App42API:initialize("e1ab95c1cd21bd9d5e45fda6ac6fac73a233425f14d7c32beee1671a13a18174","dab972571a4b1f0c02fb34620ebfecc232a29fef2ccedac52c1e1d269d2a223c")
+local uploadService  = App42API:buildUploadService()
+uploadService:uploadFileForUser(fileName,userName,filePath ,fileType,description,App42CallBack)   
+--uploadService:uploadFile(fileName,filePath ,fileType,description,App42CallBack)
+function App42CallBack:onSuccess(object)   
+    print("fileName is :".. object:getFileList():getName()); 
+    print("Type is :".. object:getFileList():getType());     
+    print("Url is :".. object:getFileList():getUrl());  
+    print("fileDescription is: ".. object:getFileList():getDescription());         
+end  
+function App42CallBack:onException(exception)
+    print("Message is : "..exception:getMessage())
+    print("App Error code is : "..exception:getAppErrorCode())
+    print("Http Error code is "..exception:getHttpErrorCode())
+    print("Detail is : "..exception:getDetails())
+end
+
+
 end    
+
 
 local function takePic( event )
       if(event.phase == "began") then
 
 local function onPhotoComplete( event )
    if ( event.completed ) then
+
+    local origPath = system.pathForFile( "precomp/"..imageCounter..".jpg", system.DocumentsDirectory )
+    local newPath = system.pathForFile( "images/"..imageCounter..".jpg", system.DocumentsDirectory )
+
+imageCrop.compress(origPath, newPath)
+
+local destDir = system.DocumentsDirectory  -- Location where the file is stored
+local result, reason = os.remove( system.pathForFile( "precomp/"..imageCounter..".jpg", destDir ) )
+  
+if result then
+   print( "File removed" )
+else
+   print( "File does not exist", reason )  --> File does not exist    apple.txt: No such file or directory
+end
 
 
     table.insert( gameData.customImages, 1, imageCounter..".jpg" )
@@ -238,6 +292,8 @@ end
 
 
 displayMyImages()
+
+uploadImage()
 
    end
 end
@@ -258,7 +314,7 @@ if ( hasAccessToCamera == true ) then
    listener = onPhotoComplete,
    destination = {
       baseDir = system.DocumentsDirectory,
-      filename = "images/"..imageCounter..".jpg",
+      filename = "precomp/"..imageCounter..".jpg",
       type = "image"
    }
 } )
@@ -383,7 +439,26 @@ return canDelete
 
 end  
 
+local function deleteFromServer(fileName)
 
+    local fileName = fileName;
+    local userName = gameData.studentName
+local App42CallBack = {}
+App42API:initialize("e1ab95c1cd21bd9d5e45fda6ac6fac73a233425f14d7c32beee1671a13a18174","dab972571a4b1f0c02fb34620ebfecc232a29fef2ccedac52c1e1d269d2a223c")
+local uploadService  = App42API:buildUploadService()
+--uploadService:removeFileByName(fileName,App42CallBack)
+uploadService:removeFileByUser( fileName, userName,App42CallBack)   
+function App42CallBack:onSuccess(object)        
+    print("Response is :"..object:getStrResponse());
+end  
+function App42CallBack:onException(exception)
+    print("Message is : "..exception:getMessage())
+    print("App Error code is : "..exception:getAppErrorCode())
+    print("Http Error code is "..exception:getHttpErrorCode())
+    print("Detail is : "..exception:getDetails())
+end 
+
+end    
   
 
 
@@ -438,6 +513,8 @@ print ("to delete is "..fileToDelete)
 
                
             loadsave.saveTable (gameData.customImages, "customImageList.json" )
+
+            deleteFromServer(fileToDelete)
 
 
             else
@@ -521,6 +598,8 @@ local function onComplete( event )
 
     table.insert( gameData.customImages, 1, imageCounter..".jpg" )
 loadsave.saveTable (gameData.customImages, "customImageList.json" )
+
+uploadImage()
 
 for i=1, #imageBoxes do
 
